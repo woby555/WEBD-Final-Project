@@ -1,22 +1,3 @@
-<?php
-
-/*******w******** 
-    
-    Name: Jake Licmo
-    Date: Febuary 11, 2024
-    Description: index.php for Assignment 3. Displays all blog posts.
-
-****************/
-
-require('connect.php');
-
-$query = "SELECT * FROM blog ORDER BY date_posted DESC LIMIT 5";
-
-$statement = $db->prepare($query);
-
-$statement -> execute();
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,7 +8,6 @@ $statement -> execute();
     <title>Welcome to my Blog!</title>
 </head>
 <body>
-    <!-- Remember that alternative syntax is good and html inside php is bad -->
     <header class="header">
         <div class="text-center">
             <h1>My Blog</h1>
@@ -35,11 +15,40 @@ $statement -> execute();
     </header>
 
     <main>
-        
         <?php include('nav.php');?>
 
+        <div class="login-form">
+            <?php
+            if(isset($_SESSION['username'])) {
+                echo "<p>Welcome, ".$_SESSION['username']."! Account status: ".$_SESSION['role'].".</p>";
+                echo "<a href='logout.php'>Logout</a>";
+            } else {
+                if(isset($_SESSION['login_failure'])) {
+                    echo "<p>Login failed. Please check your credentials.</p>";
+                    unset($_SESSION['login_failure']);
+                }
+            ?>
+            <h2>Login</h2>
+            <form action="login.php" method="post">
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit">Login</button>
+            </form>
+            <div class="additional-options">
+                <a href="forgot_password.php">Forgot Password?</a>
+                <span> | </span>
+                <a href="register.php">Register</a>
+            </div>
+            <?php } ?>
+        </div>
+    
         <?php include('footer.php');?>
-
     </main>
 </body>
 </html>

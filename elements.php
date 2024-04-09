@@ -27,7 +27,7 @@
         <tbody>
             <?php foreach ($elements as $element): ?>
                 <tr>
-                    <td><img src="<?php echo $element['image_url']; ?>" alt="<?php echo $element['element_name']; ?>"></td>
+                    <td><img src="<?php echo $element['image_path']; ?>" class="element-image" alt="<?php echo $element['element_name']; ?> image"></td>
                     <td><?php echo $element['element_name']; ?></td>
                     <td><?php echo $element['description']; ?></td>
                 </tr>
