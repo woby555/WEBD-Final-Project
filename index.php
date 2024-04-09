@@ -19,7 +19,6 @@
 
         <div class="login-form">
             <?php
-            session_start();
             if(isset($_SESSION['username'])) {
                 echo "<p>Welcome, ".$_SESSION['username']."! Account status: ".$_SESSION['role'].".</p>";
                 echo "<a href='logout.php'>Logout</a>";
