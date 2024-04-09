@@ -7,6 +7,11 @@
     <title>Skills</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+<header class="header">
+    <div class="text-center">
+        <h1>My Blog</h1>
+    </div>
+</header>
 <body>
     <?php include('nav.php'); ?>
 

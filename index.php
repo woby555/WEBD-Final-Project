@@ -17,36 +17,13 @@
     <main>
         <?php include('nav.php');?>
 
-        <div class="login-form">
-            <?php
-            if(isset($_SESSION['username'])) {
-                echo "<p>Welcome, ".$_SESSION['username']."! Account status: ".$_SESSION['role'].".</p>";
-                echo "<a href='logout.php'>Logout</a>";
-            } else {
-                if(isset($_SESSION['login_failure'])) {
-                    echo "<p>Login failed. Please check your credentials.</p>";
-                    unset($_SESSION['login_failure']);
-                }
-            ?>
-            <h2>Login</h2>
-            <form action="login.php" method="post">
-                <div class="form-group">
-                    <label for="username">Username:</label>
-                    <input type="text" id="username" name="username" required>
-                </div>
-                <div class="form-group">
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" name="password" required>
-                </div>
-                <button type="submit">Login</button>
-            </form>
-            <div class="additional-options">
-                <a href="forgot_password.php">Forgot Password?</a>
-                <span> | </span>
-                <a href="register.php">Register</a>
-            </div>
-            <?php } ?>
-        </div>
+        <?php if(isset($_SESSION['username'])): ?>
+            <h1>Welcome, <?php echo $_SESSION['username']; ?>!</h1>
+        <?php endif; ?>
+        <p>This is the main landing page.</p>
+        <?php if(isset($_SESSION['username'])): ?>
+            <a href="logout.php">Logout</a>
+        <?php endif; ?>
     
         <?php include('footer.php');?>
     </main>

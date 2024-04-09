@@ -7,7 +7,7 @@
     <li><a href="classes.php" class="button-primary-outline">+ Classes</a></li>
     <li><a href="skills.php" class="button-primary-outline">+ Skills</a></li>
     <li><a href="armors.php" class="button-primary-outline">+ Armors</a></li>
-    <li><a href="login.php" class="button-primary-outline">Login</a></li>
+    <li><a href="login_page.php" class="button-primary-outline">Login</a></li>
     <?php
         session_start();
         if(isset($_SESSION['username']) && $_SESSION['role'] === 'Administrator') {

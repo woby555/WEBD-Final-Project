@@ -13,6 +13,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Elements</title>
 </head>
+<header class="header">
+        <div class="text-center">
+            <h1>My Blog</h1>
+        </div>
+</header>
 <body>
     <?php include('nav.php');?>
     <h1>Available Elements</h1>
