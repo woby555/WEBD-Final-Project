@@ -18,11 +18,10 @@
         <?php include('nav.php');?>
 
         <div class="login-form">
-            <h2>Login</h2>
             <?php
             session_start();
             if(isset($_SESSION['username'])) {
-                echo "<p>Welcome, ".$_SESSION['username']."!</p>";
+                echo "<p>Welcome, ".$_SESSION['username']."! Account status: ".$_SESSION['role'].".</p>";
                 echo "<a href='logout.php'>Logout</a>";
             } else {
                 if(isset($_SESSION['login_failure'])) {
@@ -30,6 +29,7 @@
                     unset($_SESSION['login_failure']);
                 }
             ?>
+            <h2>Login</h2>
             <form action="login.php" method="post">
                 <div class="form-group">
                     <label for="username">Username:</label>

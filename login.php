@@ -9,8 +9,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    // Retrieve the hashed password from the database
-    $stmt = $db->prepare("SELECT user_id, username, hashed_password FROM Users WHERE username = :username");
+    // Retrieve the hashed password and role from the database
+    $stmt = $db->prepare("SELECT user_id, username, hashed_password, role FROM Users WHERE username = :username");
     $stmt->bindParam(':username', $username);
     $stmt->execute();
     $user = $stmt->fetch();
@@ -18,6 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Verify password
     if ($user && password_verify($password, $user['hashed_password'])) {
         $_SESSION['username'] = $user['username'];
+        $_SESSION['role'] = $user['role']; // Set user role in session
         // Redirect to home page or do other login success logic
         header("Location: index.php");
         exit();
