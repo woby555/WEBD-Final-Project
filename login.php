@@ -19,6 +19,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($user && password_verify($password, $user['hashed_password'])) {
         $_SESSION['username'] = $user['username'];
         $_SESSION['role'] = $user['role']; // Set user role in session
+
+        if ($user['role'] == 'Administrator') {
+            require_once 'authenticate.php'; // Include the additional authentication script
+        }
+        
         // Redirect to home page or do other login success logic
         header("Location: index.php");
         exit();

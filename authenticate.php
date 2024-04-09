@@ -14,5 +14,10 @@ if (
     header('WWW-Authenticate: Basic realm="Our Blog"');
     exit("Access Denied: Username and password required.");
 }
+else {
+    echo "Administrator authenticated successfully!";
+    sleep(2);
+    header("Location: index.php");
+}
 
 ?>

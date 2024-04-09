@@ -1,8 +1,8 @@
 <?php
     require_once 'connect.php';
 
-    $stmt = $db->query("SELECT * FROM Elements");
-    $elements = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $stmt = $db->query("SELECT * FROM Classes");
+    $classes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -15,21 +15,19 @@
 </head>
 <body>
     <?php include('nav.php');?>
-    <h1>Available Elements</h1>
+    <h1>Available Classes</h1>
     <table>
         <thead>
             <tr>
-                <th>Image</th>
-                <th>Name</th>
-                <th>Description</th>
+                <th>Class:</th>
+                <!--<th>Description</th>-->
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($elements as $element): ?>
+            <?php foreach ($classes as $class): ?>
                 <tr class = "element-table">
-                    <td><img src="<?php echo $element['image_path']; ?>" class="element-image" alt="<?php echo $element['element_name']; ?> image"></td>
-                    <td><?php echo $element['element_name']; ?></td>
-                    <td><?php echo $element['description']; ?></td>
+                    <td><?php echo $class['class_name']; ?></td>
+                    <!--<td><?php echo $element['description']; ?></td>-->
                 </tr>
             <?php endforeach; ?>
         </tbody>
@@ -40,7 +38,7 @@
     if(isset($_SESSION['role']) && $_SESSION['role'] === 'Administrator') {
         // Display CRUD operations for administrators
         echo '<h2>Administrator Actions</h2>';
-        echo '<a href="add_element.php">Add New Element</a>';
+        echo '<a href="add_class.php">Add New Class</a>';
         // Additional CRUD operations such as update and delete can be added here
     }
     ?>
