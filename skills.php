@@ -67,6 +67,15 @@
 
     <script src="skills.js"></script>
 
+    <?php
+    // Check if user is an administrator
+    if(isset($_SESSION['role']) && $_SESSION['role'] === 'Administrator') {
+        // Display CRUD operations for administrators
+        echo '<h2>Administrator Actions</h2>';
+        echo '<a href="add_skill.php">Add New Skill</a>';
+        // Additional CRUD operations such as update and delete can be added here
+    }
+    ?>
     <?php include('footer.php'); ?>
 </body>
 </html>

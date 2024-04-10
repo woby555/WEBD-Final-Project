@@ -16,9 +16,16 @@ CREATE TABLE Weapons (
     weapon_name VARCHAR(50) NOT NULL
 );
 
+CREATE TABLE ArmorTypes (
+    armor_type_id INT AUTO_INCREMENT PRIMARY KEY,
+    armor_type_name VARCHAR(50) NOT NULL
+);
+
 CREATE TABLE Armors (
     armor_id INT AUTO_INCREMENT PRIMARY KEY,
-    armor_name VARCHAR(50) NOT NULL
+    armor_type_id INT NOT NULL,
+    armor_name VARCHAR(50) NOT NULL,
+    FOREIGN KEY (armor_type_id) REFERENCES ArmorTypes (armor_type_id)
 );
 
 CREATE TABLE Classes (
