@@ -65,6 +65,29 @@ CREATE TABLE CharacterArmors (
     FOREIGN KEY (armor_id) REFERENCES Armors (armor_id)
 );
 
+CREATE TABLE Posts (
+    post_id INT AUTO_INCREMENT PRIMARY KEY,
+    character_id INT NOT NULL,
+    user_id INT NOT NULL,
+    title VARCHAR(100) NOT NULL,
+    content TEXT NOT NULL,
+    date_posted TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (character_id) REFERENCES Characters (character_id),
+    FOREIGN KEY (user_id) REFERENCES Users (user_id)
+);
+
+CREATE TABLE Comments (
+    comment_id INT AUTO_INCREMENT PRIMARY KEY,
+    post_id INT NOT NULL,
+    user_id INT NOT NULL,
+    content TEXT NOT NULL,
+    date_posted TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (post_id) REFERENCES Posts (post_id),
+    FOREIGN KEY (user_id) REFERENCES Users (user_id)
+);
+
+
+
 -- Debug
 DROP TABLE IF EXISTS CharacterArmors;
 DROP TABLE IF EXISTS Characters;

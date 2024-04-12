@@ -1,27 +1,27 @@
 <?php
-    require_once 'connect.php';
+require_once 'connect.php';
 
-    $stmt = $db->query("SELECT
-                        c.character_id,
-                        u.username,
-                        c.character_name,
-                        c.level,
-                        c.date_created, 
-                        cls.class_name,
-                        w.weapon_name,
-                        e.element_name
-                        FROM
-                            Characters c
-                        JOIN
-                            Users u ON c.user_id = u.user_id
-                        JOIN
-                            Classes cls ON c.class_id = cls.class_id
-                        LEFT JOIN
-                            Weapons w ON c.weapon_id = w.weapon_id
-                        JOIN
-                            Elements e ON c.element_id = e.element_id;
-                        ");
-    $characters = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$stmt = $db->query("SELECT
+                    c.character_id,
+                    u.username,
+                    c.character_name,
+                    c.level,
+                    c.date_created, 
+                    cls.class_name,
+                    w.weapon_name,
+                    e.element_name
+                    FROM
+                        Characters c
+                    JOIN
+                        Users u ON c.user_id = u.user_id
+                    JOIN
+                        Classes cls ON c.class_id = cls.class_id
+                    LEFT JOIN
+                        Weapons w ON c.weapon_id = w.weapon_id
+                    JOIN
+                        Elements e ON c.element_id = e.element_id;
+                    ");
+$characters = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -39,27 +39,28 @@
 </header>
 <body>
     <?php include('nav.php');?>
+    <h3><a href="create_char.php">Create a character</a></h3>
     <h1>Current list of characters</h1>
     <table>
         <thead>
             <tr>
-                <th>User</th>
                 <th>Character</th>
                 <th>Level</th>
                 <th>Class</th>
                 <th>Weapon</th>
                 <th>Element</th>
+                <th>Created by:</th>
             </tr>
         </thead>
         <tbody>
             <?php foreach ($characters as $character): ?>
                 <tr class="element-table">
-                    <td><?php echo $character['username']; ?></td>
-                    <td><?php echo $character['character_name']; ?></td>
+                    <td><a href="post.php?character_id=<?php echo $character['character_id']; ?>"><?php echo $character['character_name']; ?></a></td>
                     <td><?php echo $character['level']; ?></td>
                     <td><?php echo $character['class_name']; ?></td>
                     <td><?php echo $character['weapon_name'] ?? 'None'; ?></td>
                     <td><?php echo $character['element_name']; ?></td>
+                    <td><?php echo $character['username']; ?></td>
                 </tr>
             <?php endforeach; ?>
         </tbody>

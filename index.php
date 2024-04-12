@@ -18,7 +18,7 @@
         <?php include('nav.php');?>
 
         <?php if(isset($_SESSION['username'])): ?>
-            <h1>Welcome, <?php echo $_SESSION['username']; ?>!</h1>
+            <h1>Welcome, <?php echo $_SESSION['username']; ?>. Your user Id is: <?php echo $_SESSION['user_id']; ?>!</h1>
         <?php endif; ?>
         <p>This is the main landing page.</p>
         <?php if(isset($_SESSION['username'])): ?>
