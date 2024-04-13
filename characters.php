@@ -39,7 +39,6 @@ $characters = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </header>
 <body>
     <?php include('nav.php');?>
-    <h3><a href="create_char.php">Create a character</a></h3>
     <h1>Current list of characters</h1>
     <table>
         <thead>
@@ -77,7 +76,7 @@ $characters = $stmt->fetchAll(PDO::FETCH_ASSOC);
     if(isset($_SESSION['role']) && $_SESSION['role'] === 'User') {
         // Display CRUD operations for administrators
         echo '<h2>User Actions</h2>';
-        echo '<a href="add_class.php">Create a character!</a>';
+        echo '<a href="create_char.php">Create a character!</a>';
         // Additional CRUD operations such as update and delete can be added here
     }
     ?>
