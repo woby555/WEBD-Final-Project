@@ -2,14 +2,15 @@
 require_once 'connect.php';
 
 $stmt = $db->query("SELECT
-                    c.character_id,
-                    u.username,
-                    c.character_name,
-                    c.level,
-                    c.date_created, 
-                    cls.class_name,
-                    w.weapon_name,
-                    e.element_name
+                        c.character_id,
+                        u.username,
+                        c.character_name,
+                        c.level,
+                        c.date_created, 
+                        cls.class_name,
+                        w.weapon_name,
+                        e.element_name,
+                        c.user_id
                     FROM
                         Characters c
                     JOIN
@@ -19,9 +20,10 @@ $stmt = $db->query("SELECT
                     LEFT JOIN
                         Weapons w ON c.weapon_id = w.weapon_id
                     JOIN
-                        Elements e ON c.element_id = e.element_id;
+                        Elements e ON c.element_id = e.element_id
                     ");
 $characters = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 ?>
 
 <!DOCTYPE html>
@@ -54,7 +56,18 @@ $characters = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <tbody>
             <?php foreach ($characters as $character): ?>
                 <tr class="element-table">
-                    <td><a href="post.php?character_id=<?php echo $character['character_id']; ?>"><?php echo $character['character_name']; ?></a></td>
+                    <td>
+                        <a href="show.php?id=<?php echo $character['character_id']; ?>">
+                            <?php echo $character['character_name']; ?>
+                        </a>
+                        <?php if(isset($_SESSION['user_id']) && isset($character['user_id']) && $_SESSION['user_id'] === $character['user_id']): ?>
+                            <!-- Display Update and Delete links for the user's character -->
+                            <span>
+                                <a href="update.php?id=<?php echo $character['character_id']; ?>">Update</a> | 
+                                <a href="delete.php?id=<?php echo $character['character_id']; ?>">Delete</a>
+                            </span>
+                        <?php endif; ?>
+                    </td>
                     <td><?php echo $character['level']; ?></td>
                     <td><?php echo $character['class_name']; ?></td>
                     <td><?php echo $character['weapon_name'] ?? 'None'; ?></td>
@@ -70,7 +83,7 @@ $characters = $stmt->fetchAll(PDO::FETCH_ASSOC);
     if(isset($_SESSION['role']) && $_SESSION['role'] === 'Administrator') {
         // Display CRUD operations for administrators
         echo '<h2>Administrator Actions</h2>';
-        echo '<a href="add_class.php">Add New Character</a>';
+        echo '<a href="create_char.php">Add New Character</a>';
         // Additional CRUD operations such as update and delete can be added here
     }
     if(isset($_SESSION['role']) && $_SESSION['role'] === 'User') {
