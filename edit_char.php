@@ -325,21 +325,13 @@ if (!$character) {
 
             <div class="form-group">
                 <label for="image">Image:</label>
-                <input type="file" id="image" name="image" onchange="displayImage()">
+                <input type="file" id="image" name="image">
                 <?php if (!empty($character['image_path'])) : ?>
-                    <p>Current Image: <img id="currentImage" src="<?php echo $character['image_path']; ?>" alt="Current Image" width="100"></p>
+                    <p>Current Image:</p>
+                    <img src="<?php echo $character['image_path']; ?>" alt="Current Image" width="100">
                 <?php endif; ?>
             </div>
 
-            <script>
-                // Function to display the current image and preselect it in the file input field
-                function displayImage() {
-                    var currentImage = document.getElementById('currentImage').src;
-                    var fileInput = document.getElementById('image');
-                    var file = new File([currentImage], currentImage);
-                    fileInput.files = [file];
-                }
-            </script>
             <button type="submit" class="button-primary">Update Character</button>
         </form>
     </main>
