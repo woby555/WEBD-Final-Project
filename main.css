@@ -61,6 +61,16 @@ th, td {
     list-style: none;
 }
 
+.flex-container {
+    display: flex;
+    justify-content: space-between; /* Adjust as needed */
+}
+
+/* Optional: Add styles for individual sections if necessary */
+section {
+    margin-right: 20px; /* Adjust margin between sections */
+}
+
 .navbar a:hover {
     text-decoration: underline;
 }
