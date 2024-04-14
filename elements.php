@@ -47,6 +47,7 @@
         echo '<h2>Administrator Actions</h2>';
         echo '<a href="add_element.php">Add New Element</a>';
         // Additional CRUD operations such as update and delete can be added here
+        echo '<a href="delete_element.php"> Delete Element </a>';
     }
     ?>
     <?php include('footer.php');?>

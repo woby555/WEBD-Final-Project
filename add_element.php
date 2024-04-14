@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['element_name']) && !e
 
     if ($statement->execute()) {
         echo "Element created successfully!";
-        header("Location: index.php");
+        header("Location: elements.php");
     } else {
         echo "Error creating element.";
     }
