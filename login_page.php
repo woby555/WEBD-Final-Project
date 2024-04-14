@@ -21,6 +21,9 @@
 
         <div class="login-form">
             <h2>Login</h2>
+            <?php if (isset($_GET['login_error']) && $_GET['login_error'] == 1) : ?>
+                <p class="error-message">Incorrect username or password. Please try again.</p>
+            <?php endif; ?>
             <form action="login.php" method="post">
                 <div class="form-group">
                     <label for="username">Username:</label>

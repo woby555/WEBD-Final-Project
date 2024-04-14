@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         $_SESSION['login_failure'] = true;
         // Redirect to login page with error message or do other login failure logic
-        header("Location: index.php");
+        header("Location: login_page.php?login_error=1");
         exit();
     }
 } else {
