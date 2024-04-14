@@ -17,7 +17,7 @@ $classes = $statement->fetchAll(PDO::FETCH_ASSOC);
 // Check if form is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_skill'])) {
     // Validate input
-    $skill_name = trim($_POST['skill_name']);
+    $skill_name = filter_input(INPUT_POST, 'skill_name', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $class_id = $_POST['class_id'];
 
     // Insert new skill into the database
@@ -34,6 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_skill'])) {
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
