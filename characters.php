@@ -3,6 +3,7 @@ require_once 'connect.php';
 
 $stmt = $db->query("SELECT
                         c.character_id,
+                        p.post_id,
                         u.username,
                         c.character_name,
                         c.level,
@@ -15,14 +16,15 @@ $stmt = $db->query("SELECT
                     FROM
                         Characters c
                     JOIN
+                        Posts p ON c.character_id = p.character_id
+                    JOIN
                         Users u ON c.user_id = u.user_id
                     JOIN
                         Classes cls ON c.class_id = cls.class_id
                     LEFT JOIN
                         Weapons w ON c.weapon_id = w.weapon_id
                     JOIN
-                        Elements e ON c.element_id = e.element_id
-                    ");
+                        Elements e ON c.element_id = e.element_id;");
 $characters = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
@@ -63,18 +65,16 @@ $characters = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <td style="width: 50px;">
                         <?php if ($character['image_path']) : ?>
                             <!-- If character has an image, display it -->
-                            <a href="show.php?id=<?php echo $character['character_id']; ?>">
+                            <a href="show.php?post_id=<?php echo $character['post_id']; ?>">
                                 <img src="<?php echo $character['image_path']; ?>" alt="Character Image" width="100">
                             </a>
                         <?php else : ?>
                             <!-- If no image found, display default image -->
-                            <a href="show.php?id=<?php echo $character['character_id']; ?>">
                                 <img src="images/unavailable.png" alt="Character Image" width="100">
-                            </a>
                         <?php endif; ?>
                     </td>
                     <td>
-                        <a href="show.php?id=<?php echo $character['character_id']; ?>">
+                        <a href="show.php?post_id=<?php echo $character['post_id']; ?>">
                             <?php echo $character['character_name']; ?>
                         </a>
                         <?php if (isset($_SESSION['user_id']) && isset($character['user_id']) && $_SESSION['user_id'] === $character['user_id']) : ?>
