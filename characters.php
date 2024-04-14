@@ -10,7 +10,8 @@ $stmt = $db->query("SELECT
                         cls.class_name,
                         w.weapon_name,
                         e.element_name,
-                        c.user_id
+                        c.user_id,
+                        c.image_path
                     FROM
                         Characters c
                     JOIN
@@ -45,6 +46,7 @@ $characters = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <table>
         <thead>
             <tr>
+                <th></th>
                 <th>Character</th>
                 <th>Level</th>
                 <th>Class</th>
@@ -56,6 +58,19 @@ $characters = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <tbody>
             <?php foreach ($characters as $character): ?>
                 <tr class="element-table">
+                    <td style="width: 50px;">
+                        <?php if ($character['image_path']): ?>
+                            <!-- If character has an image, display it -->
+                            <a href="show.php?id=<?php echo $character['character_id']; ?>">
+                                <img src="<?php echo $character['image_path']; ?>" alt="Character Image" width="100">
+                            </a>
+                        <?php else: ?>
+                            <!-- If no image found, display default image -->
+                            <a href="show.php?id=<?php echo $character['character_id']; ?>">
+                                <img src="images/unavailable.png" alt="Character Image" width="100">
+                            </a>
+                        <?php endif; ?>
+                    </td>
                     <td>
                         <a href="show.php?id=<?php echo $character['character_id']; ?>">
                             <?php echo $character['character_name']; ?>

@@ -43,7 +43,8 @@ $classes = $statement->fetchAll(PDO::FETCH_ASSOC);
             width: 100%;
         }
 
-        th, td {
+        th,
+        td {
             border: 1px solid black;
             padding: 8px;
             text-align: left;
@@ -51,13 +52,14 @@ $classes = $statement->fetchAll(PDO::FETCH_ASSOC);
     </style>
 </head>
 <header class="header">
-        <div class="text-center">
-            <h1>Admin Dashboard</h1>
-            <p>Welcome, <?php echo $_SESSION['username']; ?>! Account status: <?php echo $_SESSION['role']; ?>, ID: <?php echo $_SESSION['user_id']; ?></p>
-            <a href="index.php"> Home </a>
-            <a href="logout.php">Logout</a>
-        </div>
+    <div class="text-center">
+        <h1>Admin Dashboard</h1>
+        <p>Welcome, <?php echo $_SESSION['username']; ?>! Account status: <?php echo $_SESSION['role']; ?>, ID: <?php echo $_SESSION['user_id']; ?></p>
+        <a href="index.php"> Home </a>
+        <a href="logout.php">Logout</a>
+    </div>
 </header>
+
 <body>
     <h1><a href="classes.php">Back to classes page</a></h1>
     <h2>Delete Classes</h2>
@@ -69,7 +71,7 @@ $classes = $statement->fetchAll(PDO::FETCH_ASSOC);
                 <th>Class Name</th>
                 <th>Description</th>
             </tr>
-            <?php foreach ($classes as $class): ?>
+            <?php foreach ($classes as $class) : ?>
                 <tr>
                     <td><input type="checkbox" name="classes[]" value="<?= $class['class_id'] ?>"></td>
                     <td><?= $class['class_id'] ?></td>

@@ -13,17 +13,32 @@ require('connect.php'); // Include database connection
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_characters'])) {
     // Loop through selected character IDs and delete them
     foreach ($_POST['characters'] as $character_id) {
+        // Fetch image path of the character
+        $queryImagePath = "SELECT image_path FROM Characters WHERE character_id = :character_id";
+        $statementImagePath = $db->prepare($queryImagePath);
+        $statementImagePath->bindValue(':character_id', $character_id);
+        $statementImagePath->execute();
+        $image_path = $statementImagePath->fetchColumn();
+
+        // Delete associated posts
+        $queryDeletePosts = "DELETE FROM Posts WHERE character_id = :character_id";
+        $statementDeletePosts = $db->prepare($queryDeletePosts);
+        $statementDeletePosts->bindValue(':character_id', $character_id);
+        $statementDeletePosts->execute();
+
         // Delete the character from the database
         $queryDeleteCharacter = "DELETE FROM Characters WHERE character_id = :character_id";
         $statementDeleteCharacter = $db->prepare($queryDeleteCharacter);
         $statementDeleteCharacter->bindValue(':character_id', $character_id);
         $statementDeleteCharacter->execute();
 
-        // Delete associated character armors
-        $queryDeleteCharacterArmors = "DELETE FROM CharacterArmors WHERE character_id = :character_id";
-        $statementDeleteCharacterArmors = $db->prepare($queryDeleteCharacterArmors);
-        $statementDeleteCharacterArmors->bindValue(':character_id', $character_id);
-        $statementDeleteCharacterArmors->execute();
+        // Delete the associated image file
+        if ($image_path) {
+            $image_file = dirname(__FILE__) . DIRECTORY_SEPARATOR . $image_path;
+            if (file_exists($image_file)) {
+                unlink($image_file); // Delete the image file
+            }
+        }
     }
     header('Location: characters.php'); // Redirect to refresh the page after deletion
     exit();
@@ -66,7 +81,7 @@ $characters = $statement->fetchAll(PDO::FETCH_ASSOC);
     </header>
     <h1><a href="characters.php">Back to Characters Page</a></h1>
     <h2>Delete Characters</h2>
-    <form action="delete_character.php" method="POST">
+    <form action="delete_char.php" method="POST">
         <table>
             <tr>
                 <th>Select</th>

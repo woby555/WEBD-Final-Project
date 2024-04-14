@@ -1,62 +1,61 @@
 <?php
-    session_start();
-    require('connect.php');
+session_start();
+require('connect.php');
 
-    // Function to safely build a path string for uploading files
-    function file_upload_path($original_filename, $upload_subfolder_name = 'uploads') {
-        $current_folder = dirname(__FILE__);
-        $path_segments = [$current_folder, $upload_subfolder_name, basename($original_filename)];
-        return join(DIRECTORY_SEPARATOR, $path_segments);
+// Function to safely build a path string for uploading files
+function file_upload_path($original_filename, $upload_subfolder_name = 'uploads') {
+    $upload_folder = 'uploads'; // Change this to your desired folder name
+    $path_segments = [$upload_folder, basename($original_filename)];
+    return join(DIRECTORY_SEPARATOR, $path_segments);
+}
+
+// Function to check if the uploaded file is an image
+function file_is_an_image($temporary_path, $new_path) {
+    $allowed_mime_types = ['image/gif', 'image/jpeg', 'image/png'];
+    $allowed_file_extensions = ['gif', 'jpg', 'jpeg', 'png'];
+    $actual_file_extension = pathinfo($new_path, PATHINFO_EXTENSION);
+    $actual_mime_type = getimagesize($temporary_path)['mime'];
+    $file_extension_is_valid = in_array($actual_file_extension, $allowed_file_extensions);
+    $mime_type_is_valid = in_array($actual_mime_type, $allowed_mime_types);
+    return $file_extension_is_valid && $mime_type_is_valid;
+}
+
+// Check if an image is uploaded
+$image_upload_detected = isset($_FILES['image']) && ($_FILES['image']['error'] === 0);
+$image_filename = null; // Initialize image filename variable
+
+if ($image_upload_detected) {
+    $image_filename = $_FILES['image']['name'];
+    $temporary_image_path = $_FILES['image']['tmp_name'];
+    $new_image_path = file_upload_path($image_filename);
+
+    // Check if the uploaded file is an image
+    if (file_is_an_image($temporary_image_path, $new_image_path)) {
+        // Move the valid uploaded image to the uploads folder
+        move_uploaded_file($temporary_image_path, $new_image_path);
+    } else {
+        // Handle invalid image uploads here
+        echo "Invalid image upload. Please upload a valid image file.";
+        // You can also redirect the user back to the form or display an error message as needed
+        exit;
     }
+}
 
-    // Function to check if the uploaded file is an image
-    function file_is_an_image($temporary_path, $new_path) {
-        $allowed_mime_types = ['image/gif', 'image/jpeg', 'image/png'];
-        $allowed_file_extensions = ['gif', 'jpg', 'jpeg', 'png'];
-        $actual_file_extension = pathinfo($new_path, PATHINFO_EXTENSION);
-        $actual_mime_type = getimagesize($temporary_path)['mime'];
-        $file_extension_is_valid = in_array($actual_file_extension, $allowed_file_extensions);
-        $mime_type_is_valid = in_array($actual_mime_type, $allowed_mime_types);
-        return $file_extension_is_valid && $mime_type_is_valid;
-    }
+// Check if the user has already created a character
+$user_id = $_SESSION['user_id'];
+$query = "SELECT * FROM Characters WHERE user_id = :user_id";
+$statement = $db->prepare($query);
+$statement->bindValue(':user_id', $user_id);
+$statement->execute();
+$existing_character = $statement->fetch(PDO::FETCH_ASSOC);
 
-    // Check if an image is uploaded
-    $image_upload_detected = isset($_FILES['image']) && ($_FILES['image']['error'] === 0);
-    $image_filename = null; // Initialize image filename variable
+if ($existing_character) {
+    // If a character already exists for the user, display a message
+    echo "<script>alert('You have already created a character! Please either edit your existing character, or delete a character to create a new one.'); window.location.href = 'characters.php';</script>";
+    exit; // Stop execution to prevent further processing
+}
 
-    if ($image_upload_detected) {
-        $image_filename = $_FILES['image']['name'];
-        $temporary_image_path = $_FILES['image']['tmp_name'];
-        $new_image_path = file_upload_path($image_filename);
-
-        // Check if the uploaded file is an image
-        if (file_is_an_image($temporary_image_path, $new_image_path)) {
-            // Move the valid uploaded image to the uploads folder
-            move_uploaded_file($temporary_image_path, $new_image_path);
-        } else {
-            // Handle invalid image uploads here
-            echo "Invalid image upload. Please upload a valid image file.";
-            // You can also redirect the user back to the form or display an error message as needed
-            exit;
-        }
-    }
-
-    // Check if the user has already created a character
-    $user_id = $_SESSION['user_id'];
-    $query = "SELECT * FROM Characters WHERE user_id = :user_id";
-    $statement = $db->prepare($query);
-    $statement->bindValue(':user_id', $user_id);
-    $statement->execute();
-    $existing_character = $statement->fetch(PDO::FETCH_ASSOC);
-
-    if ($existing_character) {
-        // If a character already exists for the user, display a message
-        echo "<script>alert('You have already created a character! Please either edit your existing character, or delete a character to create a new one.'); window.location.href = 'characters.php';</script>";
-        exit; // Stop execution to prevent further processing
-    }
-    
-
-    if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['character_name']) && !empty($_POST['class_id']) && !empty($_POST['weapon_id']) && !empty($_POST['element_id']) && !empty($_POST['armor_id']) && !empty($_POST['level']) && !empty($_POST['content'])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['character_name']) && !empty($_POST['class_id']) && !empty($_POST['weapon_id']) && !empty($_POST['element_id']) && !empty($_POST['armor_id']) && !empty($_POST['level']) && !empty($_POST['content'])) {
     $character_name = filter_input(INPUT_POST, 'character_name', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $class_id = $_POST['class_id'];
     $weapon_id = $_POST['weapon_id'];
@@ -68,8 +67,11 @@
     $level = $_POST['level'];
     $content = filter_input(INPUT_POST, 'content', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
+    // Construct image path similar to the add_elements.php script
+    $image_path = file_upload_path($image_filename);
+
     // Insert the character into the Characters table
-    $query = "INSERT INTO Characters (user_id, character_name, level, class_id, weapon_id, element_id) VALUES (:user_id, :character_name, :level, :class_id, :weapon_id, :element_id)";
+    $query = "INSERT INTO Characters (user_id, character_name, level, class_id, weapon_id, element_id, image_path) VALUES (:user_id, :character_name, :level, :class_id, :weapon_id, :element_id, :image_path)";
     $statement = $db->prepare($query);
     $statement->bindValue(':user_id', $_SESSION['user_id']);
     $statement->bindValue(':character_name', $character_name);
@@ -77,6 +79,7 @@
     $statement->bindValue(':class_id', $class_id);
     $statement->bindValue(':weapon_id', $weapon_id);
     $statement->bindValue(':element_id', $element_id);
+    $statement->bindValue(':image_path', $image_path);
     
     if ($statement->execute()) {
         // Get the character ID of the newly inserted character
@@ -146,6 +149,8 @@
     exit;
 }
 ?>
+
+
 
 
 
