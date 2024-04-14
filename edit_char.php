@@ -154,6 +154,7 @@ if (!$character) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -161,13 +162,14 @@ if (!$character) {
     <link rel="stylesheet" href="main.css">
     <title>Edit Character</title>
 </head>
+
 <body>
     <header class="header">
         <div class="text-center">
             <h1>My Blog</h1>
         </div>
     </header>
-    <nav class = "navbar">
+    <nav class="navbar">
         <ul class="container">
             <li><a href="index.php">Home</a></li>
             <li><a href="characters.php" class="button-primary-outline">Characters</a></li>
@@ -176,173 +178,174 @@ if (!$character) {
             <li><a href="skills.php" class="button-primary-outline">Skills</a></li>
             <li><a href="weapons.php" class="button-primary-outline">Weapons</a></li>
             <li><a href="armors.php" class="button-primary-outline">Armors</a></li>
-            <?php    if(isset($_SESSION['username']) && $_SESSION['role'] === 'Administrator') {
-            echo '<li><a href="admin_dashboard.php" class="button-primary-outline">Admin Dashboard</a></li>';
-            echo '<br><li><a href="logout.php" class="button-primary-outline">Log out</a></li>';
-            } else if(isset($_SESSION['username'])) {
+            <?php if (isset($_SESSION['username']) && $_SESSION['role'] === 'Administrator') {
+                echo '<li><a href="admin_dashboard.php" class="button-primary-outline">Admin Dashboard</a></li>';
+                echo '<br><li><a href="logout.php" class="button-primary-outline">Log out</a></li>';
+            } else if (isset($_SESSION['username'])) {
                 echo '<br><li><a href="logout.php" class="button-primary-outline">Log out</a></li>';
             } else {
                 echo '<li><a href="login_page.php" class="button-primary-outline">Login</a></li>';
-            }?>
+            } ?>
         </ul>
     </nav>
 
     <main class="container py-1" id="edit-character">
-    <form action="" method="POST" enctype="multipart/form-data">
-        <h2>Edit your character</h2>
-        <input type="hidden" name="character_id" value="<?php echo $character['character_id']; ?>">
-        <div class="form-group">
-            <label for="character_name">Character Name:</label>
-            <input type="text" id="character_name" name="character_name" value="<?php echo $character['character_name']; ?>" required>
-        </div>
-        <div class="form-group">
-            <label for="class_id">Class:</label>
-            <select id="class_id" name="class_id" required>
-                <option value="">Select Class</option>
-                <?php
-                $stmt = $db->query("SELECT class_id, class_name FROM Classes");
-                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                    $selected = ($row['class_id'] == $character['class_id']) ? 'selected' : '';
-                    echo "<option value='{$row['class_id']}' $selected>{$row['class_name']}</option>";
-                }
-                ?>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="weapon_id">Weapon:</label>
-            <select id="weapon_id" name="weapon_id" required>
-                <option value="">Select Weapon</option>
-                <?php
-                $stmt = $db->query("SELECT weapon_id, weapon_name FROM Weapons");
-                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                    $selected = ($row['weapon_id'] == $character['weapon_id']) ? 'selected' : '';
-                    echo "<option value='{$row['weapon_id']}' $selected>{$row['weapon_name']}</option>";
-                }
-                ?>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="element_id">Element:</label>
-            <select id="element_id" name="element_id" required>
-                <option value="">Select Element</option>
-                <?php
-                $stmt = $db->query("SELECT element_id, element_name FROM Elements");
-                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                    $selected = ($row['element_id'] == $character['element_id']) ? 'selected' : '';
-                    echo "<option value='{$row['element_id']}' $selected>{$row['element_name']}</option>";
-                }
-                ?>
-            </select>
-        </div>
-        <div class="form-group">
-    <label for="armor_id">Head Armor:</label>
-    <select id="armor_id" name="armor_id" required>
-        <option value="">Select Armor</option>
-        <?php
-        $stmt = $db->query("SELECT armor_id, armor_name FROM Armors WHERE armor_type_id = 1"); // armor_type_id 1 = head
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            $selected = '';
-            foreach ($equipped_armors as $armor) {
-                if ($armor['armor_type_name'] === 'Head' && $armor['armor_id'] == $row['armor_id']) {
-                    $selected = 'selected';
-                    break;
-                }
-            }
-            echo "<option value='{$row['armor_id']}' $selected>{$row['armor_name']}</option>";
-        }
-        ?>
-    </select>
-    </div>
-        <div class="form-group">
-            <label for="armor_id_2">Hands Armor:</label>
-            <select id="armor_id_2" name="armor_id_2" required>
-                <option value="">Select Armor</option>
-                <?php
-                $stmt = $db->query("SELECT armor_id, armor_name FROM Armors WHERE armor_type_id = 2"); // armor_type_id 2 = hands
-                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                    $selected = '';
-                    foreach ($equipped_armors as $armor) {
-                        if ($armor['armor_type_name'] === 'Hands' && $armor['armor_id'] == $row['armor_id']) {
-                            $selected = 'selected';
-                            break;
-                        }
+        <form action="" method="POST" enctype="multipart/form-data">
+            <h2>Edit your character</h2>
+            <input type="hidden" name="character_id" value="<?php echo $character['character_id']; ?>">
+            <div class="form-group">
+                <label for="character_name">Character Name:</label>
+                <input type="text" id="character_name" name="character_name" value="<?php echo $character['character_name']; ?>" required>
+            </div>
+            <div class="form-group">
+                <label for="class_id">Class:</label>
+                <select id="class_id" name="class_id" required>
+                    <option value="">Select Class</option>
+                    <?php
+                    $stmt = $db->query("SELECT class_id, class_name FROM Classes");
+                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                        $selected = ($row['class_id'] == $character['class_id']) ? 'selected' : '';
+                        echo "<option value='{$row['class_id']}' $selected>{$row['class_name']}</option>";
                     }
-                    echo "<option value='{$row['armor_id']}' $selected>{$row['armor_name']}</option>";
-                }
-                ?>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="armor_id_3">Body Armor:</label>
-            <select id="armor_id_3" name="armor_id_3" required>
-                <option value="">Select Armor</option>
-                <?php
-                $stmt = $db->query("SELECT armor_id, armor_name FROM Armors WHERE armor_type_id = 3"); // armor_type_id 3 = body
-                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                    $selected = '';
-                    foreach ($equipped_armors as $armor) {
-                        if ($armor['armor_type_name'] === 'Body' && $armor['armor_id'] == $row['armor_id']) {
-                            $selected = 'selected';
-                            break;
-                        }
+                    ?>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="weapon_id">Weapon:</label>
+                <select id="weapon_id" name="weapon_id" required>
+                    <option value="">Select Weapon</option>
+                    <?php
+                    $stmt = $db->query("SELECT weapon_id, weapon_name FROM Weapons");
+                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                        $selected = ($row['weapon_id'] == $character['weapon_id']) ? 'selected' : '';
+                        echo "<option value='{$row['weapon_id']}' $selected>{$row['weapon_name']}</option>";
                     }
-                    echo "<option value='{$row['armor_id']}' $selected>{$row['armor_name']}</option>";
-                }
-                ?>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="armor_id_4">Shoes Armor:</label>
-            <select id="armor_id_4" name="armor_id_4" required>
-                <option value="">Select Armor</option>
-                <?php
-                $stmt = $db->query("SELECT armor_id, armor_name FROM Armors WHERE armor_type_id = 4"); // armor_type_id 4 = shoes
-                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                    $selected = '';
-                    foreach ($equipped_armors as $armor) {
-                        if ($armor['armor_type_name'] === 'Shoes' && $armor['armor_id'] == $row['armor_id']) {
-                            $selected = 'selected';
-                            break;
-                        }
+                    ?>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="element_id">Element:</label>
+                <select id="element_id" name="element_id" required>
+                    <option value="">Select Element</option>
+                    <?php
+                    $stmt = $db->query("SELECT element_id, element_name FROM Elements");
+                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                        $selected = ($row['element_id'] == $character['element_id']) ? 'selected' : '';
+                        echo "<option value='{$row['element_id']}' $selected>{$row['element_name']}</option>";
                     }
-                    echo "<option value='{$row['armor_id']}' $selected>{$row['armor_name']}</option>";
+                    ?>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="armor_id">Head Armor:</label>
+                <select id="armor_id" name="armor_id" required>
+                    <option value="">Select Armor</option>
+                    <?php
+                    $stmt = $db->query("SELECT armor_id, armor_name FROM Armors WHERE armor_type_id = 1"); // armor_type_id 1 = head
+                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                        $selected = '';
+                        foreach ($equipped_armors as $armor) {
+                            if ($armor['armor_type_name'] === 'Head' && $armor['armor_id'] == $row['armor_id']) {
+                                $selected = 'selected';
+                                break;
+                            }
+                        }
+                        echo "<option value='{$row['armor_id']}' $selected>{$row['armor_name']}</option>";
+                    }
+                    ?>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="armor_id_2">Hands Armor:</label>
+                <select id="armor_id_2" name="armor_id_2" required>
+                    <option value="">Select Armor</option>
+                    <?php
+                    $stmt = $db->query("SELECT armor_id, armor_name FROM Armors WHERE armor_type_id = 2"); // armor_type_id 2 = hands
+                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                        $selected = '';
+                        foreach ($equipped_armors as $armor) {
+                            if ($armor['armor_type_name'] === 'Hands' && $armor['armor_id'] == $row['armor_id']) {
+                                $selected = 'selected';
+                                break;
+                            }
+                        }
+                        echo "<option value='{$row['armor_id']}' $selected>{$row['armor_name']}</option>";
+                    }
+                    ?>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="armor_id_3">Body Armor:</label>
+                <select id="armor_id_3" name="armor_id_3" required>
+                    <option value="">Select Armor</option>
+                    <?php
+                    $stmt = $db->query("SELECT armor_id, armor_name FROM Armors WHERE armor_type_id = 3"); // armor_type_id 3 = body
+                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                        $selected = '';
+                        foreach ($equipped_armors as $armor) {
+                            if ($armor['armor_type_name'] === 'Body' && $armor['armor_id'] == $row['armor_id']) {
+                                $selected = 'selected';
+                                break;
+                            }
+                        }
+                        echo "<option value='{$row['armor_id']}' $selected>{$row['armor_name']}</option>";
+                    }
+                    ?>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="armor_id_4">Shoes Armor:</label>
+                <select id="armor_id_4" name="armor_id_4" required>
+                    <option value="">Select Armor</option>
+                    <?php
+                    $stmt = $db->query("SELECT armor_id, armor_name FROM Armors WHERE armor_type_id = 4"); // armor_type_id 4 = shoes
+                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                        $selected = '';
+                        foreach ($equipped_armors as $armor) {
+                            if ($armor['armor_type_name'] === 'Shoes' && $armor['armor_id'] == $row['armor_id']) {
+                                $selected = 'selected';
+                                break;
+                            }
+                        }
+                        echo "<option value='{$row['armor_id']}' $selected>{$row['armor_name']}</option>";
+                    }
+                    ?>
+                </select>
+            </div>
+
+            <!-- Repeat the same process for armor_id, armor_id_2, armor_id_3, and armor_id_4 -->
+            <div class="form-group">
+                <label for="level">Level:</label>
+                <input type="number" id="level" name="level" min="1" max="100" value="<?php echo $character['level']; ?>" required>
+            </div>
+            <div class="form-group">
+                <label for="content">Content:</label>
+                <textarea id="content" name="content" rows="4" cols="50" required><?php echo isset($character['content']) ? $character['content'] : ''; ?></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="image">Image:</label>
+                <input type="file" id="image" name="image" onchange="displayImage()">
+                <?php if (!empty($character['image_path'])) : ?>
+                    <p>Current Image: <img id="currentImage" src="<?php echo $character['image_path']; ?>" alt="Current Image" width="100"></p>
+                <?php endif; ?>
+            </div>
+
+            <script>
+                // Function to display the current image and preselect it in the file input field
+                function displayImage() {
+                    var currentImage = document.getElementById('currentImage').src;
+                    var fileInput = document.getElementById('image');
+                    var file = new File([currentImage], currentImage);
+                    fileInput.files = [file];
                 }
-                ?>
-            </select>
-        </div>
-
-        <!-- Repeat the same process for armor_id, armor_id_2, armor_id_3, and armor_id_4 -->
-        <div class="form-group">
-            <label for="level">Level:</label>
-            <input type="number" id="level" name="level" min="1" max="100" value="<?php echo $character['level']; ?>" required>
-        </div>
-        <div class="form-group">
-            <label for="content">Content:</label>
-            <textarea id="content" name="content" rows="4" cols="50" required><?php echo isset($character['content']) ? $character['content'] : ''; ?></textarea>
-        </div>
-
-        <div class="form-group">
-            <label for="image">Image:</label>
-            <input type="file" id="image" name="image" onchange="displayImage()">
-            <?php if (!empty($character['image_path'])): ?>
-                <p>Current Image: <img id="currentImage" src="<?php echo $character['image_path']; ?>" alt="Current Image" width="100"></p>
-            <?php endif; ?>
-        </div>
-
-        <script>
-            // Function to display the current image and preselect it in the file input field
-            function displayImage() {
-                var currentImage = document.getElementById('currentImage').src;
-                var fileInput = document.getElementById('image');
-                var file = new File([currentImage], currentImage);
-                fileInput.files = [file];
-            }
-        </script>
-        <button type="submit" class="button-primary">Update Character</button>
-    </form>
-</main>
+            </script>
+            <button type="submit" class="button-primary">Update Character</button>
+        </form>
+    </main>
 
 
-    <?php include('footer.php');?>
+    <?php include('footer.php'); ?>
 </body>
+
 </html>

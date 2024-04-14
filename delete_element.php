@@ -10,7 +10,8 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'Administrator') {
 require('connect.php');; // Include database connection
 
 // Function to delete an image file from the server
-function deleteImage($imagePath) {
+function deleteImage($imagePath)
+{
     if (file_exists($imagePath)) {
         unlink($imagePath); // Delete the file
     }
@@ -62,7 +63,8 @@ $elements = $statement->fetchAll(PDO::FETCH_ASSOC);
             width: 100%;
         }
 
-        th, td {
+        th,
+        td {
             border: 1px solid black;
             padding: 8px;
             text-align: left;
@@ -70,13 +72,14 @@ $elements = $statement->fetchAll(PDO::FETCH_ASSOC);
     </style>
 </head>
 <header class="header">
-        <div class="text-center">
-            <h1>Admin Dashboard</h1>
-            <p>Welcome, <?php echo $_SESSION['username']; ?>! Account status: <?php echo $_SESSION['role']; ?>, ID: <?php echo $_SESSION['user_id']; ?></p>
-            <a href="index.php"> Home </a>
-            <a href="logout.php">Logout</a>
-        </div>
+    <div class="text-center">
+        <h1>Admin Dashboard</h1>
+        <p>Welcome, <?php echo $_SESSION['username']; ?>! Account status: <?php echo $_SESSION['role']; ?>, ID: <?php echo $_SESSION['user_id']; ?></p>
+        <a href="index.php"> Home </a>
+        <a href="logout.php">Logout</a>
+    </div>
 </header>
+
 <body>
     <h1><a href="elements.php">Back to elements page</a></h1>
     <h2>Delete Elements</h2>
@@ -89,7 +92,7 @@ $elements = $statement->fetchAll(PDO::FETCH_ASSOC);
                 <th>Description</th>
                 <th>Image Path</th>
             </tr>
-            <?php foreach ($elements as $element): ?>
+            <?php foreach ($elements as $element) : ?>
                 <tr>
                     <td><input type="checkbox" name="elements[]" value="<?= $element['element_id'] ?>"></td>
                     <td><?= $element['element_id'] ?></td>

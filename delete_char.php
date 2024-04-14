@@ -52,6 +52,7 @@ $characters = $statement->fetchAll(PDO::FETCH_ASSOC);
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -63,13 +64,15 @@ $characters = $statement->fetchAll(PDO::FETCH_ASSOC);
             width: 100%;
         }
 
-        th, td {
+        th,
+        td {
             border: 1px solid black;
             padding: 8px;
             text-align: left;
         }
     </style>
 </head>
+
 <body>
     <header class="header">
         <div class="text-center">
@@ -94,7 +97,7 @@ $characters = $statement->fetchAll(PDO::FETCH_ASSOC);
                 <th>Weapon ID</th>
                 <th>Element ID</th>
             </tr>
-            <?php foreach ($characters as $character): ?>
+            <?php foreach ($characters as $character) : ?>
                 <tr>
                     <td><input type="checkbox" name="characters[]" value="<?= $character['character_id'] ?>"></td>
                     <td><?= $character['character_id'] ?></td>
@@ -112,4 +115,5 @@ $characters = $statement->fetchAll(PDO::FETCH_ASSOC);
         <input type="submit" name="delete_characters" value="Delete Selected Characters">
     </form>
 </body>
+
 </html>

@@ -42,6 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -49,6 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="main.css">
     <title>Register</title>
 </head>
+
 <body>
     <header class="header">
         <div class="text-center">
@@ -57,12 +59,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </header>
 
     <main>
-        <?php include('nav.php');?>
+        <?php include('nav.php'); ?>
         <div class="register-form">
             <h2>Register</h2>
             <?php
-            if(isset($_SESSION['register_error'])) {
-                echo "<p class='error'>".$_SESSION['register_error']."</p>";
+            if (isset($_SESSION['register_error'])) {
+                echo "<p class='error'>" . $_SESSION['register_error'] . "</p>";
                 unset($_SESSION['register_error']);
             }
             ?>
@@ -86,8 +88,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <button type="submit">Register</button>
             </form>
         </div>
-        
-        <?php include('footer.php');?>
+
+        <?php include('footer.php'); ?>
     </main>
 </body>
+
 </html>

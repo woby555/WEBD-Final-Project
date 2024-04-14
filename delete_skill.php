@@ -31,6 +31,7 @@ $skills = $statement->fetchAll(PDO::FETCH_ASSOC);
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -42,7 +43,8 @@ $skills = $statement->fetchAll(PDO::FETCH_ASSOC);
             width: 100%;
         }
 
-        th, td {
+        th,
+        td {
             border: 1px solid black;
             padding: 8px;
             text-align: left;
@@ -50,13 +52,14 @@ $skills = $statement->fetchAll(PDO::FETCH_ASSOC);
     </style>
 </head>
 <header class="header">
-        <div class="text-center">
-            <h1>Admin Dashboard</h1>
-            <p>Welcome, <?php echo $_SESSION['username']; ?>! Account status: <?php echo $_SESSION['role']; ?>, ID: <?php echo $_SESSION['user_id']; ?></p>
-            <a href="index.php"> Home </a>
-            <a href="logout.php">Logout</a>
-        </div>
+    <div class="text-center">
+        <h1>Admin Dashboard</h1>
+        <p>Welcome, <?php echo $_SESSION['username']; ?>! Account status: <?php echo $_SESSION['role']; ?>, ID: <?php echo $_SESSION['user_id']; ?></p>
+        <a href="index.php"> Home </a>
+        <a href="logout.php">Logout</a>
+    </div>
 </header>
+
 <body>
     <h1><a href="skills.php">Back to Skills Page</a></h1>
     <h2>Delete Skills</h2>
@@ -68,7 +71,7 @@ $skills = $statement->fetchAll(PDO::FETCH_ASSOC);
                 <th>Skill Name</th>
                 <th>Associated Class ID</th>
             </tr>
-            <?php foreach ($skills as $skill): ?>
+            <?php foreach ($skills as $skill) : ?>
                 <tr>
                     <td><input type="checkbox" name="skills[]" value="<?= $skill['skill_id'] ?>"></td>
                     <td><?= $skill['skill_id'] ?></td>
@@ -81,4 +84,5 @@ $skills = $statement->fetchAll(PDO::FETCH_ASSOC);
         <input type="submit" name="delete_skills" value="Delete Selected Skills">
     </form>
 </body>
+
 </html>

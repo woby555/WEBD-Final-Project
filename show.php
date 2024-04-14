@@ -33,6 +33,7 @@ $post = $statement->fetch(PDO::FETCH_ASSOC);
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -40,6 +41,7 @@ $post = $statement->fetch(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="main.css">
     <title><?php echo $character['character_name']; ?>'s Details</title>
 </head>
+
 <body>
     <header class="header">
         <div class="text-center">
@@ -47,7 +49,7 @@ $post = $statement->fetch(PDO::FETCH_ASSOC);
         </div>
     </header>
 
-    <?php include('nav.php');?>
+    <?php include('nav.php'); ?>
 
     <main class="container py-1">
         <h2><?php echo $character['character_name']; ?>'s Details</h2>
@@ -60,6 +62,7 @@ $post = $statement->fetch(PDO::FETCH_ASSOC);
         </div>
     </main>
 
-    <?php include('footer.php');?>
+    <?php include('footer.php'); ?>
 </body>
+
 </html>

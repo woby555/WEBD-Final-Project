@@ -3,14 +3,16 @@ session_start();
 require('connect.php');
 
 // Function to safely build a path string for uploading files
-function file_upload_path($original_filename, $upload_subfolder_name = 'uploads') {
+function file_upload_path($original_filename, $upload_subfolder_name = 'uploads')
+{
     $upload_folder = 'uploads'; // Change this to your desired folder name
     $path_segments = [$upload_folder, basename($original_filename)];
     return join(DIRECTORY_SEPARATOR, $path_segments);
 }
 
 // Function to check if the uploaded file is an image
-function file_is_an_image($temporary_path, $new_path) {
+function file_is_an_image($temporary_path, $new_path)
+{
     $allowed_mime_types = ['image/gif', 'image/jpeg', 'image/png'];
     $allowed_file_extensions = ['gif', 'jpg', 'jpeg', 'png'];
     $actual_file_extension = pathinfo($new_path, PATHINFO_EXTENSION);
@@ -80,7 +82,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['character_name']) && 
     $statement->bindValue(':weapon_id', $weapon_id);
     $statement->bindValue(':element_id', $element_id);
     $statement->bindValue(':image_path', $image_path);
-    
+
     if ($statement->execute()) {
         // Get the character ID of the newly inserted character
         $character_id = $db->lastInsertId();
@@ -90,28 +92,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['character_name']) && 
         $statement = $db->prepare($query);
         $statement->bindValue(':character_id', $character_id);
         $statement->bindValue(':armor_id', $armor_id);
-        
+
         if ($statement->execute()) {
             // Insert the armor 2 into the CharacterArmors table
             $query = "INSERT INTO CharacterArmors (character_id, armor_id) VALUES (:character_id, :armor_id)";
             $statement = $db->prepare($query);
             $statement->bindValue(':character_id', $character_id);
             $statement->bindValue(':armor_id', $armor_id_2);
-            
+
             if ($statement->execute()) {
                 // Insert the armor 3 into the CharacterArmors table
                 $query = "INSERT INTO CharacterArmors (character_id, armor_id) VALUES (:character_id, :armor_id)";
                 $statement = $db->prepare($query);
                 $statement->bindValue(':character_id', $character_id);
                 $statement->bindValue(':armor_id', $armor_id_3);
-                
+
                 if ($statement->execute()) {
                     // Insert the armor 4 into the CharacterArmors table
                     $query = "INSERT INTO CharacterArmors (character_id, armor_id) VALUES (:character_id, :armor_id)";
                     $statement = $db->prepare($query);
                     $statement->bindValue(':character_id', $character_id);
                     $statement->bindValue(':armor_id', $armor_id_4);
-                    
+
                     if ($statement->execute()) {
                         // Get the user ID from the session
                         $user_id = $_SESSION['user_id'];
@@ -122,7 +124,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['character_name']) && 
                         $statement->bindValue(':character_id', $character_id);
                         $statement->bindValue(':user_id', $user_id);
                         $statement->bindValue(':content', $content);
-                        
+
                         if ($statement->execute()) {
                             echo "Character and Post created successfully!";
                         } else {
@@ -157,6 +159,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['character_name']) && 
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -164,13 +167,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['character_name']) && 
     <link rel="stylesheet" href="main.css">
     <title>Create Character</title>
 </head>
+
 <body>
     <header class="header">
         <div class="text-center">
             <h1>My Blog</h1>
         </div>
     </header>
-    <nav class = "navbar">
+    <nav class="navbar">
         <ul class="container">
             <li><a href="index.php">Home</a></li>
             <li><a href="characters.php" class="button-primary-outline">Characters</a></li>
@@ -179,14 +183,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['character_name']) && 
             <li><a href="skills.php" class="button-primary-outline">Skills</a></li>
             <li><a href="weapons.php" class="button-primary-outline">Weapons</a></li>
             <li><a href="armors.php" class="button-primary-outline">Armors</a></li>
-            <?php    if(isset($_SESSION['username']) && $_SESSION['role'] === 'Administrator') {
-            echo '<li><a href="admin_dashboard.php" class="button-primary-outline">Admin Dashboard</a></li>';
-            echo '<br><li><a href="logout.php" class="button-primary-outline">Log out</a></li>';
-            } else if(isset($_SESSION['username'])) {
+            <?php if (isset($_SESSION['username']) && $_SESSION['role'] === 'Administrator') {
+                echo '<li><a href="admin_dashboard.php" class="button-primary-outline">Admin Dashboard</a></li>';
+                echo '<br><li><a href="logout.php" class="button-primary-outline">Log out</a></li>';
+            } else if (isset($_SESSION['username'])) {
                 echo '<br><li><a href="logout.php" class="button-primary-outline">Log out</a></li>';
             } else {
                 echo '<li><a href="login_page.php" class="button-primary-outline">Login</a></li>';
-            }?>
+            } ?>
         </ul>
     </nav>
 
@@ -301,6 +305,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['character_name']) && 
     </main>
 
 
-    <?php include('footer.php');?>
+    <?php include('footer.php'); ?>
 </body>
+
 </html>

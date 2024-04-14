@@ -10,10 +10,10 @@
         <li><a href="armors.php" class="button-primary-outline">Armors</a></li>
         <?php
         session_start();
-        if(isset($_SESSION['username']) && $_SESSION['role'] === 'Administrator') {
+        if (isset($_SESSION['username']) && $_SESSION['role'] === 'Administrator') {
             echo '<li><a href="admin_dashboard.php" class="button-primary-outline">Admin Dashboard</a></li>';
             echo '<br><li><a href="logout.php" class="button-primary-outline">Log out</a></li>';
-        } else if(isset($_SESSION['username'])) {
+        } else if (isset($_SESSION['username'])) {
             echo '<br><li><a href="logout.php" class="button-primary-outline">Log out</a></li>';
         } else {
             echo '<li><a href="login_page.php" class="button-primary-outline">Login</a></li>';

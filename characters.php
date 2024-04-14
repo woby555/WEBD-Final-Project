@@ -29,6 +29,7 @@ $characters = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -40,8 +41,9 @@ $characters = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <h1>My Blog</h1>
     </div>
 </header>
+
 <body>
-    <?php include('nav.php');?>
+    <?php include('nav.php'); ?>
     <h1>Current list of characters</h1>
     <table>
         <thead>
@@ -56,15 +58,15 @@ $characters = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($characters as $character): ?>
+            <?php foreach ($characters as $character) : ?>
                 <tr class="element-table">
                     <td style="width: 50px;">
-                        <?php if ($character['image_path']): ?>
+                        <?php if ($character['image_path']) : ?>
                             <!-- If character has an image, display it -->
                             <a href="show.php?id=<?php echo $character['character_id']; ?>">
                                 <img src="<?php echo $character['image_path']; ?>" alt="Character Image" width="100">
                             </a>
-                        <?php else: ?>
+                        <?php else : ?>
                             <!-- If no image found, display default image -->
                             <a href="show.php?id=<?php echo $character['character_id']; ?>">
                                 <img src="images/unavailable.png" alt="Character Image" width="100">
@@ -75,10 +77,10 @@ $characters = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <a href="show.php?id=<?php echo $character['character_id']; ?>">
                             <?php echo $character['character_name']; ?>
                         </a>
-                        <?php if(isset($_SESSION['user_id']) && isset($character['user_id']) && $_SESSION['user_id'] === $character['user_id']): ?>
+                        <?php if (isset($_SESSION['user_id']) && isset($character['user_id']) && $_SESSION['user_id'] === $character['user_id']) : ?>
                             <!-- Display Update and Delete links for the user's character -->
                             <span>
-                                <a href="edit_char.php?id=<?php echo $character['character_id']; ?>">Update</a> | 
+                                <a href="edit_char.php?id=<?php echo $character['character_id']; ?>">Update</a> |
                                 <a href="delete.php?id=<?php echo $character['character_id']; ?>">Delete</a>
                             </span>
                         <?php endif; ?>
@@ -95,20 +97,21 @@ $characters = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <?php
     // Check if user is an administrator
-    if(isset($_SESSION['role']) && $_SESSION['role'] === 'Administrator') {
+    if (isset($_SESSION['role']) && $_SESSION['role'] === 'Administrator') {
         // Display CRUD operations for administrators
         echo '<h2>Administrator Actions</h2>';
         echo '<a href="create_char.php">Add New Character</a>';
         echo '<a href="delete_char.php">Delete New Character</a>';
         // Additional CRUD operations such as update and delete can be added here
     }
-    if(isset($_SESSION['role']) && $_SESSION['role'] === 'User') {
+    if (isset($_SESSION['role']) && $_SESSION['role'] === 'User') {
         // Display CRUD operations for administrators
         echo '<h2>User Actions</h2>';
         echo '<a href="create_char.php">Create a character!</a>';
         // Additional CRUD operations such as update and delete can be added here
     }
     ?>
-    <?php include('footer.php');?>
+    <?php include('footer.php'); ?>
 </body>
+
 </html>

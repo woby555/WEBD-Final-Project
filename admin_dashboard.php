@@ -17,6 +17,7 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,6 +25,7 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="main.css">
     <title>Admin Dashboard</title>
 </head>
+
 <body>
     <header class="header">
         <div class="text-center">
@@ -48,7 +50,7 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($users as $user): ?>
+                    <?php foreach ($users as $user) : ?>
                         <tr>
                             <td><?php echo $user['user_id']; ?></td>
                             <td><?php echo $user['username']; ?></td>
@@ -91,4 +93,5 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </section>
     </main>
 </body>
+
 </html>

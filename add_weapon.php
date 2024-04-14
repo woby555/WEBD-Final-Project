@@ -10,7 +10,7 @@ require('connect.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['weapon_name'])) {
     $weapon_name = filter_input(INPUT_POST, 'weapon_name', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-    
+
     // Insert the weapon into the Weapons table
     $query = "INSERT INTO Weapons (weapon_name) VALUES (:weapon_name)";
     $statement = $db->prepare($query);
@@ -27,6 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['weapon_name'])) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -34,6 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['weapon_name'])) {
     <link rel="stylesheet" href="main.css">
     <title>Add Weapon</title>
 </head>
+
 <body>
     <nav class="navbar">
         <ul class="container">
@@ -45,10 +47,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['weapon_name'])) {
             <li><a href="weapons.php" class="button-primary-outline">Weapons</a></li>
             <li><a href="armors.php" class="button-primary-outline">Armors</a></li>
             <?php
-            if(isset($_SESSION['username']) && $_SESSION['role'] === 'Administrator') {
+            if (isset($_SESSION['username']) && $_SESSION['role'] === 'Administrator') {
                 echo '<li><a href="admin_dashboard.php" class="button-primary-outline">Admin Dashboard</a></li>';
                 echo '<br><li><a href="logout.php" class="button-primary-outline">Log out</a></li>';
-            } else if(isset($_SESSION['username'])) {
+            } else if (isset($_SESSION['username'])) {
                 echo '<br><li><a href="logout.php" class="button-primary-outline">Log out</a></li>';
             } else {
                 echo '<li><a href="login_page.php" class="button-primary-outline">Login</a></li>';
@@ -64,6 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['weapon_name'])) {
         </div>
         <button type="submit">Add Weapon</button>
     </form>
-    <?php include('footer.php');?>
+    <?php include('footer.php'); ?>
 </body>
+
 </html>

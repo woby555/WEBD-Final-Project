@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,6 +13,7 @@
         <h1>My Blog</h1>
     </div>
 </header>
+
 <body>
     <?php include('nav.php'); ?>
 
@@ -19,7 +21,7 @@
 
     <!-- Sorting buttons -->
     <div id="sorting-buttons">
-        <button onclick="clearSort()">CLEAR SORTING</button> 
+        <button onclick="clearSort()">CLEAR SORTING</button>
         <button onclick="sortTable(0)">Sort by Skill Name</button>
         <button onclick="sortTable(1)">Sort by Class</button>
 
@@ -69,7 +71,7 @@
 
     <?php
     // Check if user is an administrator
-    if(isset($_SESSION['role']) && $_SESSION['role'] === 'Administrator') {
+    if (isset($_SESSION['role']) && $_SESSION['role'] === 'Administrator') {
         // Display CRUD operations for administrators
         echo '<h2>Administrator Actions</h2>';
         echo '<a href="add_skill.php">Add New Skill</a>';
@@ -79,4 +81,5 @@
     ?>
     <?php include('footer.php'); ?>
 </body>
+
 </html>

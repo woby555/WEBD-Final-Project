@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="main.css">
     <title>Welcome to my Blog!</title>
 </head>
+
 <body>
     <header class="header">
         <div class="text-center">
@@ -15,7 +17,7 @@
     </header>
 
     <main>
-        <?php include('nav.php');?>
+        <?php include('nav.php'); ?>
 
         <div class="login-form">
             <h2>Login</h2>
@@ -36,8 +38,9 @@
                 <a href="register.php">Register</a>
             </div>
         </div>
-    
-        <?php include('footer.php');?>
+
+        <?php include('footer.php'); ?>
     </main>
 </body>
+
 </html>

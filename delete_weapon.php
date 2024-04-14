@@ -31,6 +31,7 @@ $weapons = $statement->fetchAll(PDO::FETCH_ASSOC);
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -42,7 +43,8 @@ $weapons = $statement->fetchAll(PDO::FETCH_ASSOC);
             width: 100%;
         }
 
-        th, td {
+        th,
+        td {
             border: 1px solid black;
             padding: 8px;
             text-align: left;
@@ -50,13 +52,14 @@ $weapons = $statement->fetchAll(PDO::FETCH_ASSOC);
     </style>
 </head>
 <header class="header">
-        <div class="text-center">
-            <h1>Admin Dashboard</h1>
-            <p>Welcome, <?php echo $_SESSION['username']; ?>! Account status: <?php echo $_SESSION['role']; ?>, ID: <?php echo $_SESSION['user_id']; ?></p>
-            <a href="index.php"> Home </a>
-            <a href="logout.php">Logout</a>
-        </div>
+    <div class="text-center">
+        <h1>Admin Dashboard</h1>
+        <p>Welcome, <?php echo $_SESSION['username']; ?>! Account status: <?php echo $_SESSION['role']; ?>, ID: <?php echo $_SESSION['user_id']; ?></p>
+        <a href="index.php"> Home </a>
+        <a href="logout.php">Logout</a>
+    </div>
 </header>
+
 <body>
     <h1><a href="weapons.php">Back to Weapons Page</a></h1>
     <h2>Delete Weapons</h2>
@@ -67,7 +70,7 @@ $weapons = $statement->fetchAll(PDO::FETCH_ASSOC);
                 <th>Weapon ID</th>
                 <th>Weapon Name</th>
             </tr>
-            <?php foreach ($weapons as $weapon): ?>
+            <?php foreach ($weapons as $weapon) : ?>
                 <tr>
                     <td><input type="checkbox" name="weapons[]" value="<?= $weapon['weapon_id'] ?>"></td>
                     <td><?= $weapon['weapon_id'] ?></td>
@@ -79,4 +82,5 @@ $weapons = $statement->fetchAll(PDO::FETCH_ASSOC);
         <input type="submit" name="delete_weapons" value="Delete Selected Weapons">
     </form>
 </body>
+
 </html>

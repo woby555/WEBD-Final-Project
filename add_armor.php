@@ -37,6 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_armor'])) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -44,6 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_armor'])) {
     <title>Add Armor</title>
     <link rel="stylesheet" href="main.css">
 </head>
+
 <body>
     <nav class="navbar">
         <ul class="container">
@@ -55,10 +57,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_armor'])) {
             <li><a href="weapons.php" class="button-primary-outline">Weapons</a></li>
             <li><a href="armors.php" class="button-primary-outline">Armors</a></li>
             <?php
-            if(isset($_SESSION['username']) && $_SESSION['role'] === 'Administrator') {
+            if (isset($_SESSION['username']) && $_SESSION['role'] === 'Administrator') {
                 echo '<li><a href="admin_dashboard.php" class="button-primary-outline">Admin Dashboard</a></li>';
                 echo '<br><li><a href="logout.php" class="button-primary-outline">Log out</a></li>';
-            } else if(isset($_SESSION['username'])) {
+            } else if (isset($_SESSION['username'])) {
                 echo '<br><li><a href="logout.php" class="button-primary-outline">Log out</a></li>';
             } else {
                 echo '<li><a href="login_page.php" class="button-primary-outline">Login</a></li>';
@@ -71,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_armor'])) {
         <div>
             <label for="armor_type_id">Armor Type:</label>
             <select name="armor_type_id" id="armor_type_id">
-                <?php foreach ($armor_types as $armor_type): ?>
+                <?php foreach ($armor_types as $armor_type) : ?>
                     <option value="<?= $armor_type['armor_type_id'] ?>"><?= $armor_type['armor_type_name'] ?></option>
                 <?php endforeach; ?>
             </select>
@@ -82,6 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_armor'])) {
         </div>
         <button type="submit" name="add_armor">Add Armor</button>
     </form>
-    <?php include('footer.php');?>
+    <?php include('footer.php'); ?>
 </body>
+
 </html>
