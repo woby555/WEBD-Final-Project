@@ -37,7 +37,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['class_name']) && !emp
     <title>Add Class</title>
 </head>
 <body>
-
     <nav class="navbar">
         <ul class="container">
             <li><a href="index.php">Home</a></li>
