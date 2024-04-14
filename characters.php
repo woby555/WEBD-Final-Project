@@ -84,6 +84,7 @@ $characters = $stmt->fetchAll(PDO::FETCH_ASSOC);
         // Display CRUD operations for administrators
         echo '<h2>Administrator Actions</h2>';
         echo '<a href="create_char.php">Add New Character</a>';
+        echo '<a href="delete_char.php">Delete New Character</a>';
         // Additional CRUD operations such as update and delete can be added here
     }
     if(isset($_SESSION['role']) && $_SESSION['role'] === 'User') {

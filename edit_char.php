@@ -1,5 +1,4 @@
-<?php
-session_start();
+<?php session_start();
 require('connect.php');
 
 // Check if character ID is provided
@@ -38,105 +37,78 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['character_name']) && 
     $statement->bindValue(':weapon_id', $weapon_id);
     $statement->bindValue(':element_id', $element_id);
     $statement->bindValue(':character_id', $character_id);
-    
+
     if ($statement->execute()) {
-        // Update the armor in the CharacterArmors table
-                $query = "UPDATE CharacterArmors ca
-                INNER JOIN Armors a ON ca.armor_id = a.armor_id
-                SET ca.armor_id = :armor_id
-                WHERE ca.character_id = :character_id AND a.armor_type_id = 1";
+        // Update or insert armor entries in the CharacterArmors table
+        $armorIds = array($armor_id, $armor_id_2, $armor_id_3, $armor_id_4);
+        $armorTypes = array(1, 2, 3, 4); // Corresponding armor types for each armor
 
-                $statement = $db->prepare($query);
-                $statement->bindValue(':armor_id', $armor_id);
-                $statement->bindValue(':character_id', $character_id);
-        
-        if ($statement->execute()) {
-            // Update the armor 2 in the CharacterArmors table
-                $query = "UPDATE CharacterArmors ca
-                INNER JOIN Armors a ON ca.armor_id = a.armor_id
-                SET ca.armor_id = :armor_id
-                WHERE ca.character_id = :character_id AND a.armor_type_id = 2";
-  
-                $statement = $db->prepare($query);
-                $statement->bindValue(':armor_id', $armor_id_2);
-                $statement->bindValue(':character_id', $character_id);
-                            
-            if ($statement->execute()) {
-                // Update the armor 3 in the CharacterArmors table
-                $query = "UPDATE CharacterArmors ca
-                INNER JOIN Armors a ON ca.armor_id = a.armor_id
-                SET ca.armor_id = :armor_id
-                WHERE ca.character_id = :character_id AND a.armor_type_id = 3";
-      
-                $statement = $db->prepare($query);
-                $statement->bindValue(':armor_id', $armor_id_3);
-                $statement->bindValue(':character_id', $character_id);
-                            
-                if ($statement->execute()) {
-                    // Update the armor 4 in the CharacterArmors table
-                    $query = "UPDATE CharacterArmors ca
-                            INNER JOIN Armors a ON ca.armor_id = a.armor_id
-                            SET ca.armor_id = :armor_id
-                            WHERE ca.character_id = :character_id AND a.armor_type_id = 4";
+        for ($i = 0; $i < count($armorIds); $i++) {
+            $armorId = $armorIds[$i];
+            $armorType = $armorTypes[$i];
 
-                    $statement = $db->prepare($query);
-                    $statement->bindValue(':armor_id', $armor_id_4);
-                    $statement->bindValue(':character_id', $character_id);
-                    
-                    if ($statement->execute()) {
-                        // Update the post in the Posts table
-                        $query = "UPDATE Posts 
-                                  SET content = :content 
-                                  WHERE character_id = :character_id";
-                        $statement = $db->prepare($query);
-                        $statement->bindValue(':content', $content);
-                        $statement->bindValue(':character_id', $character_id);
-                        
-                        if ($statement->execute()) {
-                            echo "Character and Post updated successfully!";
-                            sleep(2);
-                            header("Location: characters.php");
-                        } else {
-                            echo "Error updating post.";
-                        }
-                    } else {
-                        echo "Error updating shoes armor.";
-                    }
-                } else {
-                    echo "Error updating body armor.";
-                }
+            // Check if an entry exists for the character and armor combination
+            $queryCheckArmor = "SELECT * FROM CharacterArmors WHERE character_id = :character_id AND armor_id = :armor_id";
+            $stmtCheckArmor = $db->prepare($queryCheckArmor);
+            $stmtCheckArmor->bindValue(':character_id', $character_id);
+            $stmtCheckArmor->bindValue(':armor_id', $armorId);
+            $stmtCheckArmor->execute();
+            $existingArmor = $stmtCheckArmor->fetch(PDO::FETCH_ASSOC);
+
+            if ($existingArmor) {
+                // Update the existing entry
+                $queryUpdateArmor = "UPDATE CharacterArmors SET armor_id = :armor_id WHERE character_id = :character_id AND armor_id = :existing_armor_id";
+                $stmtUpdateArmor = $db->prepare($queryUpdateArmor);
+                $stmtUpdateArmor->bindValue(':armor_id', $armorId);
+                $stmtUpdateArmor->bindValue(':character_id', $character_id);
+                $stmtUpdateArmor->bindValue(':existing_armor_id', $existingArmor['armor_id']);
+                $stmtUpdateArmor->execute();
             } else {
-                echo "Error updating hands armor.";
+                // Insert a new entry
+                $queryInsertArmor = "INSERT INTO CharacterArmors (character_id, armor_id) VALUES (:character_id, :armor_id)";
+                $stmtInsertArmor = $db->prepare($queryInsertArmor);
+                $stmtInsertArmor->bindValue(':character_id', $character_id);
+                $stmtInsertArmor->bindValue(':armor_id', $armorId);
+                $stmtInsertArmor->execute();
             }
-        } else {
-            echo "Error updating head armor.";
         }
+
+        // Update the post in the Posts table
+        $queryUpdatePost = "UPDATE Posts SET content = :content WHERE character_id = :character_id";
+        $stmtUpdatePost = $db->prepare($queryUpdatePost);
+        $stmtUpdatePost->bindValue(':content', $content);
+        $stmtUpdatePost->bindValue(':character_id', $character_id);
+        $stmtUpdatePost->execute();
+
+        // Redirect to characters.php after successful update
+        header("Location: characters.php");
+        exit();
     } else {
+        // Error updating character
         echo "Error updating character.";
     }
 }
 
-
-
 // Fetch character details based on ID
-$query = "SELECT c.*, p.content 
-          FROM Characters c 
-          LEFT JOIN Posts p ON c.character_id = p.character_id 
-          WHERE c.character_id = :character_id";
-$statement = $db->prepare($query);
-$statement->bindValue(':character_id', $character_id);
-$statement->execute();
-$character = $statement->fetch(PDO::FETCH_ASSOC);
+$queryCharacter = "SELECT c.*, p.content 
+                   FROM Characters c 
+                   LEFT JOIN Posts p ON c.character_id = p.character_id 
+                   WHERE c.character_id = :character_id";
+$stmtCharacter = $db->prepare($queryCharacter);
+$stmtCharacter->bindValue(':character_id', $character_id);
+$stmtCharacter->execute();
+$character = $stmtCharacter->fetch(PDO::FETCH_ASSOC);
 
 // Retrieve the character's equipped armors along with their types
-$stmt = $db->prepare("SELECT ca.armor_id, a.armor_name, at.armor_type_name 
-                      FROM CharacterArmors ca
-                      INNER JOIN Armors a ON ca.armor_id = a.armor_id
-                      INNER JOIN ArmorTypes at ON a.armor_type_id = at.armor_type_id
-                      WHERE ca.character_id = :character_id");
-$stmt->bindValue(':character_id', $character['character_id']);
-$stmt->execute();
-$equipped_armors = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$queryArmors = "SELECT ca.armor_id, a.armor_name, at.armor_type_name 
+                FROM CharacterArmors ca
+                INNER JOIN Armors a ON ca.armor_id = a.armor_id
+                INNER JOIN ArmorTypes at ON a.armor_type_id = at.armor_type_id
+                WHERE ca.character_id = :character_id";
+$stmtArmors = $db->prepare($queryArmors);
+$stmtArmors->bindValue(':character_id', $character['character_id']);
+$stmtArmors->execute();
+$equipped_armors = $stmtArmors->fetchAll(PDO::FETCH_ASSOC);
 
 // Check if character exists
 if (!$character) {
@@ -144,8 +116,8 @@ if (!$character) {
     header('Location: characters.php');
     exit();
 }
-
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

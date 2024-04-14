@@ -49,6 +49,14 @@ $skills = $statement->fetchAll(PDO::FETCH_ASSOC);
         }
     </style>
 </head>
+<header class="header">
+        <div class="text-center">
+            <h1>Admin Dashboard</h1>
+            <p>Welcome, <?php echo $_SESSION['username']; ?>! Account status: <?php echo $_SESSION['role']; ?>, ID: <?php echo $_SESSION['user_id']; ?></p>
+            <a href="index.php"> Home </a>
+            <a href="logout.php">Logout</a>
+        </div>
+</header>
 <body>
     <h1><a href="skills.php">Back to Skills Page</a></h1>
     <h2>Delete Skills</h2>
