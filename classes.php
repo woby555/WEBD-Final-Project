@@ -1,8 +1,9 @@
 <?php
     require_once 'connect.php';
 
-    $stmt = $db->query("SELECT * FROM Classes");
+    $stmt = $db->query("SELECT c.class_name, c.description FROM Classes c");
     $classes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $description = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -25,14 +26,14 @@
         <thead>
             <tr>
                 <th>Class:</th>
-                <!--<th>Description</th>-->
+                <th>Description</th>
             </tr>
         </thead>
         <tbody>
             <?php foreach ($classes as $class): ?>
                 <tr class = "element-table">
                     <td><?php echo $class['class_name']; ?></td>
-                    <!--<td><?php echo $element['description']; ?></td>-->
+                    <td><?php echo $class['description']; ?></td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
@@ -44,7 +45,7 @@
         // Display CRUD operations for administrators
         echo '<h2>Administrator Actions</h2>';
         echo '<a href="add_class.php">Add New Class</a>';
-        // Additional CRUD operations such as update and delete can be added here
+        echo '<a href="delete_class.php"> Delete Class </a>';
     }
     ?>
     <?php include('footer.php');?>
