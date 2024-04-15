@@ -32,6 +32,9 @@ function getUsername($user_id)
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     return $result ? $result['username'] : 'Unknown';
 }
+
+//////////////////// CAPTCHA TEST
+// Generate a random CAPTCHA code
 ?>
 
 <!DOCTYPE html>
@@ -104,7 +107,7 @@ function getUsername($user_id)
         </div>
 
 
-        <?php if (isset($_SESSION['user_id']) && $_SESSION['role'] === 'User' || $_SESSION['role'] === 'Administrator') : ?>
+        <?php if (isset($_SESSION['user_id']) && ($_SESSION['role'] === 'User' || $_SESSION['role'] === 'Administrator')) : ?>
             <div class="comment-form">
                 <h3>Add a Comment</h3>
                 <form action="add_comment.php" method="post">
@@ -113,10 +116,16 @@ function getUsername($user_id)
                         <label for="comment">Comment:</label>
                         <textarea id="comment" name="comment" rows="4" required></textarea>
                     </div>
+                    <div class="form-group">
+                        <label for="captcha">CAPTCHA:</label><br>
+                        <img src="captcha.php" alt="CAPTCHA"><br>
+                        <input type="text" id="captcha" name="captcha" required>
+                    </div>
                     <button type="submit">Submit</button>
                 </form>
             </div>
         <?php endif; ?>
+
 
 
         <?php include('footer.php'); ?>
