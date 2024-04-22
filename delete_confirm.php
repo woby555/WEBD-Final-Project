@@ -15,6 +15,12 @@ if (isset($_GET['id']) && isset($_SESSION['user_id'])) {
     $statementImagePath->execute();
     $image_path = $statementImagePath->fetchColumn();
 
+    // Delete associated records from the Comments table for each post
+    $queryDeleteComments = "DELETE FROM Comments WHERE post_id IN (SELECT post_id FROM Posts WHERE character_id = :character_id)";
+    $statementDeleteComments = $db->prepare($queryDeleteComments);
+    $statementDeleteComments->bindValue(':character_id', $character_id);
+    $statementDeleteComments->execute();
+
     // Delete associated records from the Posts table
     $query_delete_posts = "DELETE FROM Posts WHERE character_id = :character_id";
     $statement_delete_posts = $db->prepare($query_delete_posts);
@@ -53,3 +59,4 @@ if (isset($_GET['id']) && isset($_SESSION['user_id'])) {
     header('Location: characters.php');
     exit();
 }
+?>

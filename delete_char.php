@@ -9,8 +9,8 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'Administrator') {
 
 require('connect.php'); // Include database connection
 
-// Check if form is submitted
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_characters'])) {
+// Check if form is submitted and characters are selected
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_characters']) && isset($_POST['characters'])) {
     // Loop through selected character IDs and delete them
     foreach ($_POST['characters'] as $character_id) {
         // Fetch image path of the character
@@ -19,6 +19,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_characters']))
         $statementImagePath->bindValue(':character_id', $character_id);
         $statementImagePath->execute();
         $image_path = $statementImagePath->fetchColumn();
+
+        // Delete associated comments
+        $queryDeleteComments = "DELETE FROM Comments WHERE post_id IN (SELECT post_id FROM Posts WHERE character_id = :character_id)";
+        $statementDeleteComments = $db->prepare($queryDeleteComments);
+        $statementDeleteComments->bindValue(':character_id', $character_id);
+        $statementDeleteComments->execute();
 
         // Delete associated posts
         $queryDeletePosts = "DELETE FROM Posts WHERE character_id = :character_id";
@@ -48,6 +54,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_characters']))
 $query = "SELECT * FROM Characters";
 $statement = $db->query($query);
 $characters = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+
 ?>
 
 <!DOCTYPE html>

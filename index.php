@@ -6,13 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="main.css">
-    <title>Welcome to my Blog!</title>
+    <title>Welcome to Blue Protocol Community Creations!</title>
 </head>
 
 <body>
     <header class="header">
         <div class="text-center">
-            <img src="images/logo.png">
+            <img class="logo" src="images/logos.png">
         </div>
     </header>
 
@@ -20,8 +20,9 @@
         <?php include('nav.php'); ?>
 
         <?php if (isset($_SESSION['username'])) : ?>
-            <p>Welcome, <?php echo $_SESSION['username']; ?>. Your user Id is: <?php echo $_SESSION['user_id']; ?>!</p>
+            <p class="welcome">Welcome, <?php echo $_SESSION['username']; ?>. Your user Id is: <?php echo $_SESSION['user_id']; ?>!</p>
         <?php endif; ?>
+
         <h1>Welcome to Blue Protocol Community Creations!</h1>
         <p>Dive into the vibrant world of Blue Protocol with our community-driven platform designed exclusively for avid gamers like you. Whether you're a seasoned veteran or just stepping into the fray, our CMS website offers a dynamic space to unleash your creativity and connect with fellow players.</p>
 
