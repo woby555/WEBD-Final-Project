@@ -53,8 +53,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <body>
     <header class="header">
-        <div class="text-center">
-            <h1>My Blog</h1>
+    <div class="text-center">
+            <img class="logo" src="images/logos.png">
         </div>
     </header>
 

@@ -53,13 +53,13 @@ function getUsername($user_id)
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="main.css">
-    <title>Welcome to my Blog!</title>
+    <title>Viewing Character</title>
 </head>
 
 <body>
     <header class="header">
         <div class="text-center">
-            <h1>My Blog</h1>
+            <img class="logo" src="images/logos.png">
         </div>
     </header>
 

@@ -10,7 +10,7 @@
 </head>
 <header class="header">
     <div class="text-center">
-        <h1>My Blog</h1>
+        <img class="logo" src="images/logos.png">
     </div>
 </header>
 

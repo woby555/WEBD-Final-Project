@@ -13,11 +13,11 @@ $description = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elements</title>
+    <title>Classes</title>
 </head>
 <header class="header">
     <div class="text-center">
-        <h1>My Blog</h1>
+        <img class="logo" src="images/logos.png">
     </div>
 </header>
 
@@ -27,7 +27,7 @@ $description = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <table>
         <thead>
             <tr>
-                <th>Class:</th>
+                <th>Class</th>
                 <th>Description</th>
             </tr>
         </thead>

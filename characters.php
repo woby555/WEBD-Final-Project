@@ -37,11 +37,11 @@ $characters = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="main.css">
-    <title>Weapons</title>
+    <title>Characters</title>
 </head>
 <header class="header">
     <div class="text-center">
-        <h1>My Blog</h1>
+        <img class="logo" src="images/logos.png">
     </div>
 </header>
 
@@ -81,7 +81,7 @@ $characters = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <?php if (isset($_SESSION['user_id']) && isset($character['user_id']) && $_SESSION['user_id'] === $character['user_id']) : ?>
                             <!-- Display Update and Delete links for the user's character -->
                             <span>
-                                <a href="edit_char.php?id=<?php echo $character['character_id']; ?>">Update</a> |
+                                <br><a href="edit_char.php?id=<?php echo $character['character_id']; ?>">Update</a> |
                                 <a href="delete.php?id=<?php echo $character['character_id']; ?>">Delete</a>
                             </span>
                         <?php endif; ?>
