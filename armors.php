@@ -43,16 +43,18 @@ $armors = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </tbody>
     </table>
 
-    <?php
-    // Check if user is an administrator
-    if (isset($_SESSION['role']) && $_SESSION['role'] === 'Administrator') {
-        // Display CRUD operations for administrators
-        echo '<h2>Administrator Actions</h2>';
-        echo '<a href="add_armor.php">Add New Armor</a>';
-        echo '<a href="delete_armor.php">Delete Armor</a>';
-        // Additional CRUD operations such as update and delete can be added here
-    }
-    ?>
+    <div class="actions">
+        <?php
+        // Check if user is an administrator
+        if (isset($_SESSION['role']) && $_SESSION['role'] === 'Administrator') {
+            // Display CRUD operations for administrators
+            echo '<h2>Administrator Actions</h2>';
+            echo '<a href="add_armor.php">Add New Armor</a><br>';
+            echo '<a href="delete_armor.php">Delete Armor</a>';
+            // Additional CRUD operations such as update and delete can be added here
+        }
+        ?>
+    </div>
     <?php include('footer.php'); ?>
 </body>
 

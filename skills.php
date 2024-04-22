@@ -22,7 +22,6 @@
     <!-- Sorting buttons -->
     <div id="sorting-buttons">
         <button onclick="clearSort()">CLEAR SORTING</button>
-        <button onclick="sortTable(0)">Sort by Skill Name</button>
         <button onclick="sortTable(1)">Sort by Class</button>
 
         <!-- Additional buttons to sort by respective classes -->
@@ -69,16 +68,18 @@
 
     <script src="skills.js"></script>
 
-    <?php
-    // Check if user is an administrator
-    if (isset($_SESSION['role']) && $_SESSION['role'] === 'Administrator') {
-        // Display CRUD operations for administrators
-        echo '<h2>Administrator Actions</h2>';
-        echo '<a href="add_skill.php">Add New Skill</a>';
-        echo '<a href="delete_skill.php"> Delete Skill</a>';
-        // Additional CRUD operations such as update and delete can be added here
-    }
-    ?>
+    <div class="actions">
+        <?php
+        // Check if user is an administrator
+        if (isset($_SESSION['role']) && $_SESSION['role'] === 'Administrator') {
+            // Display CRUD operations for administrators
+            echo '<h2>Administrator Actions</h2>';
+            echo '<a href="add_skill.php">Add New Skill</a><br>';
+            echo '<a href="delete_skill.php"> Delete Skill</a>';
+            // Additional CRUD operations such as update and delete can be added here
+        }
+        ?>
+    </div>
     <?php include('footer.php'); ?>
 </body>
 

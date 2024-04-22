@@ -12,7 +12,7 @@
 <body>
     <header class="header">
         <div class="text-center">
-            <h1>My Blog</h1>
+            <img src="images/logo.png">
         </div>
     </header>
 
@@ -20,9 +20,18 @@
         <?php include('nav.php'); ?>
 
         <?php if (isset($_SESSION['username'])) : ?>
-            <h1>Welcome, <?php echo $_SESSION['username']; ?>. Your user Id is: <?php echo $_SESSION['user_id']; ?>!</h1>
+            <p>Welcome, <?php echo $_SESSION['username']; ?>. Your user Id is: <?php echo $_SESSION['user_id']; ?>!</p>
         <?php endif; ?>
-        <p>This is the main landing page.</p>
+        <h1>Welcome to Blue Protocol Community Creations!</h1>
+        <p>Dive into the vibrant world of Blue Protocol with our community-driven platform designed exclusively for avid gamers like you. Whether you're a seasoned veteran or just stepping into the fray, our CMS website offers a dynamic space to unleash your creativity and connect with fellow players.</p>
+
+        <h2>Forge Your Legend</h2>
+        <p>Craft your own character from the ground up, shaping every aspect of their identity. Choose from a diverse array of classes, each with unique abilities and playstyles. Harness the elemental forces of Wind, Fire, Ice, and more to tailor your character's power to your liking. Arm yourself with a vast selection of weapons and armor, customizing your loadout for every encounter.</p>
+
+        <h2>Share and Connect</h3>
+        <p>Join a thriving community of Blue Protocol enthusiasts eager to share their creations and insights. Showcase your characters, movesets, and layouts with ease, inspiring and collaborating with fellow members. Engage in lively discussions on strategy, theorycrafting the ultimate builds, and unraveling the game's deepest mysteries.</p>
+        <br>
+        <p>Ready to take the next step in your Blue Protocol adventure? Sign up now and become part of our vibrant community. The future of Blue Protocol awaits, and it's yours to shape.</p>
         <?php if (isset($_SESSION['username'])) : ?>
             <a href="logout.php">Logout</a>
         <?php endif; ?>

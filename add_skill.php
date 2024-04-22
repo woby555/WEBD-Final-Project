@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_skill'])) {
 <body>
     <nav class="navbar">
         <ul class="container">
-            <li><a href="index.php">Home</a></li>
+            <li><a href="index.php" class="button-primary-outline">Home</a></li>
             <li><a href="characters.php" class="button-primary-outline">Characters</a></li>
             <li><a href="elements.php" class="button-primary-outline">Elements</a></li>
             <li><a href="classes.php" class="button-primary-outline">Classes</a></li>
@@ -68,6 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_skill'])) {
             ?>
         </ul>
     </nav>
+    <div class="add-new-skill">
     <h1>Add New Skill</h1>
     <?php if (isset($error_message)) echo "<p>$error_message</p>"; ?>
     <form action="add_skill.php" method="POST">
@@ -86,6 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_skill'])) {
     </form>
     <br>
     <a href="skills.php">Back to Skills Page</a>
+    </div>
     <?php include("footer.php") ?>
 </body>
 

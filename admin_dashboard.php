@@ -42,6 +42,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -91,6 +93,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             </td>
                         </tr>
                     <?php endforeach; ?>
+                    <?php if (isset($_SESSION['update_error_details'])) {
+                        echo "Update Error: " . $_SESSION['update_error_details'][0]; // This will display the error message
+                        // Optionally, you can also display additional error details like error code and SQL statement
+                        echo "<br>Error Code: " . $_SESSION['update_error_details'][1];
+                        echo "<br>SQL Statement: " . $_SESSION['update_error_details'][2];
+
+                        // Clear the session variable to avoid displaying the same error message on subsequent page loads
+                        unset($_SESSION['update_error_details']);
+                    } ?>
                 </tbody>
             </table>
         </section>
@@ -123,7 +134,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </form>
             </section>
 
-            <!-- Other admin control links -->
             <section>
                 <h2>Quick Access Controls</h2>
                 <table>

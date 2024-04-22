@@ -54,7 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['element_name']) && !e
 
     <nav class="navbar">
         <ul class="container">
-            <li><a href="index.php">Home</a></li>
+            <li><a href="index.php" class="button-primary-outline">Home</a></li>
             <li><a href="characters.php" class="button-primary-outline">Characters</a></li>
             <li><a href="elements.php" class="button-primary-outline">Elements</a></li>
             <li><a href="classes.php" class="button-primary-outline">Classes</a></li>
@@ -73,22 +73,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['element_name']) && !e
             ?>
         </ul>
     </nav>
-    <h2>Add New Element</h2>
-    <form action="add_element.php" method="POST" enctype="multipart/form-data">
-        <div>
-            <label for="element_name">Element Name:</label>
-            <input type="text" id="element_name" name="element_name" required>
-        </div>
-        <div>
-            <label for="description">Description:</label>
-            <textarea id="description" name="description" rows="4" cols="50" required></textarea>
-        </div>
-        <div>
-            <label for="image">Image:</label>
-            <input type="file" id="image" name="image">
-        </div>
-        <button type="submit">Add Element</button>
-    </form>
+    <div class="add-new-element">
+        <h2>Add New Element</h2>
+        <form action="add_element.php" method="POST" enctype="multipart/form-data">
+            <div>
+                <label for="element_name">Element Name:</label>
+                <input type="text" id="element_name" name="element_name" required>
+            </div>
+            <div>
+                <label for="description">Description:</label>
+                <textarea id="description" name="description" rows="4" cols="50" required></textarea>
+            </div>
+            <div>
+                <label for="image">Image:</label>
+                <input type="file" id="image" name="image">
+            </div>
+            <button type="submit">Add Element</button>
+        </form>
+    </div>
     <?php include('footer.php'); ?>
 </body>
 

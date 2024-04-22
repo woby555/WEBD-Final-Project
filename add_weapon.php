@@ -58,14 +58,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['weapon_name'])) {
             ?>
         </ul>
     </nav>
-    <h2>Add New Weapon</h2>
-    <form action="add_weapon.php" method="POST" enctype="multipart/form-data">
-        <div>
-            <label for="weapon_name">Weapon Name:</label>
-            <input type="text" id="weapon_name" name="weapon_name" required>
-        </div>
-        <button type="submit">Add Weapon</button>
-    </form>
+    <div class="add-new-weapon">
+        <h2>Add New Weapon</h2>
+        <form action="add_weapon.php" method="POST" enctype="multipart/form-data">
+            <div>
+                <label for="weapon_name">Weapon Name:</label>
+                <input type="text" id="weapon_name" name="weapon_name" required>
+            </div>
+            <button type="submit">Add Weapon</button>
+        </form>
+    </div>
     <?php include('footer.php'); ?>
 </body>
 

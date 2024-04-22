@@ -41,16 +41,18 @@ $description = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </tbody>
     </table>
 
-    <?php
-    // Check if user is an administrator
-    if (isset($_SESSION['role']) && $_SESSION['role'] === 'Administrator') {
-        // Display CRUD operations for administrators
-        echo '<h2>Administrator Actions</h2>';
-        echo '<a href="add_class.php">Add New Class</a>';
-        echo '<a href="delete_class.php"> Delete Class </a>';
-    }
-    ?>
-    <?php include('footer.php'); ?>
+    <div class="actions">
+        <?php
+        // Check if user is an administrator
+        if (isset($_SESSION['role']) && $_SESSION['role'] === 'Administrator') {
+            // Display CRUD operations for administrators
+            echo '<h2>Administrator Actions</h2>';
+            echo '<a href="add_class.php">Add New Class</a> <br>';
+            echo '<a href="delete_class.php"> Delete Class </a>';
+        }
+        ?>
+        <?php include('footer.php'); ?>
+    </div>
 </body>
 
 </html>

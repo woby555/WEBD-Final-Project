@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['class_name']) && !emp
 <body>
     <nav class="navbar">
         <ul class="container">
-            <li><a href="index.php">Home</a></li>
+            <li><a href="index.php" class="button-primary-outline">Home</a></li>
             <li><a href="characters.php" class="button-primary-outline">Characters</a></li>
             <li><a href="elements.php" class="button-primary-outline">Elements</a></li>
             <li><a href="classes.php" class="button-primary-outline">Classes</a></li>
@@ -60,18 +60,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['class_name']) && !emp
             ?>
         </ul>
     </nav>
-    <h2>Add New Element</h2>
-    <form action="add_class.php" method="POST" enctype="multipart/form-data">
-        <div>
-            <label for="class_name">Class Name:</label>
-            <input type="text" id="class_name" name="class_name" required>
-        </div>
-        <div>
-            <label for="description">Description:</label>
-            <textarea id="description" name="description" rows="4" cols="50" required></textarea>
-        </div>
-        <button type="submit">Add Class</button>
-    </form>
+    <div class="add-new-class">
+        <h2>Add New Class</h2>
+        <form action="add_class.php" method="POST" enctype="multipart/form-data">
+            <div>
+                <label for="class_name">Class Name:</label>
+                <input type="text" id="class_name" name="class_name" required>
+            </div>
+            <div>
+                <label for="description">Description:</label>
+                <textarea id="description" name="description" rows="4" cols="50" required></textarea>
+            </div>
+            <button type="submit">Add Class</button>
+        </form>
+    </div>
     <?php include('footer.php'); ?>
 </body>
 

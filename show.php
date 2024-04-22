@@ -22,6 +22,14 @@ $stmt->bindParam(':post_id', $post_id);
 $stmt->execute();
 $comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+// Fetch armors associated with the character
+$stmt = $db->prepare("SELECT a.armor_name FROM CharacterArmors ca
+                      JOIN Armors a ON ca.armor_id = a.armor_id
+                      WHERE ca.character_id = :character_id");
+$stmt->bindParam(':character_id', $post['character_id']);
+$stmt->execute();
+$armors = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
 
 function getUsername($user_id)
 {
@@ -59,22 +67,49 @@ function getUsername($user_id)
         <?php include('nav.php'); ?>
 
         <div class="post-details">
+            <?php if ($post['image_path']) : ?>
+                <img src="<?php echo $post['image_path']; ?>" alt="Character Image" width="200">
+            <?php else : ?>
+                <img src="images/unavailable.png" alt="Character Image" width="100">
+            <?php endif; ?>
             <?php if (isset($post) && $post) : ?>
                 <!-- Display character details -->
                 <h3>Character Details</h3>
-                <p>Character Name: <?php echo $post['character_name']; ?></p>
-                <p>Level: <?php echo $post['level']; ?></p>
-                <p>Class: <?php echo $post['class_name']; ?></p>
-                <p>Weapon: <?php echo $post['weapon_name'] ?? 'None'; ?></p>
-                <p>Element: <?php echo $post['element_name']; ?></p>
-                <?php if ($post['image_path']) : ?>
-                    <img src="<?php echo $post['image_path']; ?>" alt="Character Image" width="200">
+                <table>
+                    <tr>
+                        <td>Character Name:</td>
+                        <td><?php echo $post['character_name']; ?></td>
+                    </tr>
+                    <tr>
+                        <td>Level:</td>
+                        <td><?php echo $post['level']; ?></td>
+                    </tr>
+                    <tr>
+                        <td>Class:</td>
+                        <td><?php echo $post['class_name']; ?></td>
+                    </tr>
+                    <tr>
+                        <td>Weapon:</td>
+                        <td><?php echo $post['weapon_name'] ?? 'None'; ?></td>
+                    </tr>
+                    <tr>
+                        <td>Element:</td>
+                        <td><?php echo $post['element_name']; ?></td>
+                    </tr>
+                </table>
+                <h3>Equipped Armors</h3>
+                <?php if ($armors) : ?>
+                    <ul>
+                        <?php foreach ($armors as $armor) : ?>
+                            <li><?php echo $armor; ?></li>
+                        <?php endforeach; ?>
+                    </ul>
                 <?php else : ?>
-                    <img src="images/unavailable.png" alt="Character Image" width="100">
+                    <p>No armors equipped.</p>
                 <?php endif; ?>
-                <h2><?php echo $post['title']; ?></h2>
-                <p><?php echo $post['content']; ?></p>
+                <h1>Content</h1>
                 <p>Date Posted: <?php echo $post['date_posted']; ?></p>
+                <p><?php echo $post['content']; ?></p>
             <?php else : ?>
                 <p>No post found.</p>
             <?php endif; ?>

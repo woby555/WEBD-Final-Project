@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_armor'])) {
 <body>
     <nav class="navbar">
         <ul class="container">
-            <li><a href="index.php">Home</a></li>
+            <li><a href="index.php" class="button-primary-outline">Home</a></li>
             <li><a href="characters.php" class="button-primary-outline">Characters</a></li>
             <li><a href="elements.php" class="button-primary-outline">Elements</a></li>
             <li><a href="classes.php" class="button-primary-outline">Classes</a></li>
@@ -68,22 +68,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_armor'])) {
             ?>
         </ul>
     </nav>
-    <h2>Add New Armor</h2>
-    <form action="add_armor.php" method="POST">
-        <div>
-            <label for="armor_type_id">Armor Type:</label>
-            <select name="armor_type_id" id="armor_type_id">
-                <?php foreach ($armor_types as $armor_type) : ?>
-                    <option value="<?= $armor_type['armor_type_id'] ?>"><?= $armor_type['armor_type_name'] ?></option>
-                <?php endforeach; ?>
-            </select>
-        </div>
-        <div>
-            <label for="armor_name">Armor Name:</label>
-            <input type="text" id="armor_name" name="armor_name" required>
-        </div>
-        <button type="submit" name="add_armor">Add Armor</button>
-    </form>
+    <div class="add-new-armor">
+        <h2>Add New Armor</h2>
+        <form action="add_armor.php" method="POST">
+            <div>
+                <label for="armor_type_id">Armor Type:</label>
+                <select name="armor_type_id" id="armor_type_id">
+                    <?php foreach ($armor_types as $armor_type) : ?>
+                        <option value="<?= $armor_type['armor_type_id'] ?>"><?= $armor_type['armor_type_name'] ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div>
+                <label for="armor_name">Armor Name:</label>
+                <input type="text" id="armor_name" name="armor_name" required>
+            </div>
+            <button type="submit" name="add_armor">Add Armor</button>
+        </form>
+    </div>
     <?php include('footer.php'); ?>
 </body>
 

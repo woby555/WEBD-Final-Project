@@ -176,7 +176,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['character_name']) && 
     </header>
     <nav class="navbar">
         <ul class="container">
-            <li><a href="index.php">Home</a></li>
+            <li><a href="index.php" class="button-primary-outline">Home</a></li>
             <li><a href="characters.php" class="button-primary-outline">Characters</a></li>
             <li><a href="elements.php" class="button-primary-outline">Elements</a></li>
             <li><a href="classes.php" class="button-primary-outline">Classes</a></li>
