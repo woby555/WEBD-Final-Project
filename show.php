@@ -8,9 +8,9 @@ $post_id = $_GET['post_id']; // Make sure to validate and sanitize this input
 $stmt = $db->prepare("SELECT p.*, c.character_name, c.level, cls.class_name, w.weapon_name, e.element_name, c.image_path
                       FROM Posts p
                       JOIN Characters c ON p.character_id = c.character_id
-                      JOIN Classes cls ON c.class_id = cls.class_id
+                      LEFT JOIN Classes cls ON c.class_id = cls.class_id
                       LEFT JOIN Weapons w ON c.weapon_id = w.weapon_id
-                      JOIN Elements e ON c.element_id = e.element_id
+                      LEFT JOIN Elements e ON c.element_id = e.element_id
                       WHERE p.post_id = :post_id");
 $stmt->bindParam(':post_id', $post_id);
 $stmt->execute();
@@ -24,7 +24,7 @@ $comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 // Fetch armors associated with the character
 $stmt = $db->prepare("SELECT a.armor_name FROM CharacterArmors ca
-                      JOIN Armors a ON ca.armor_id = a.armor_id
+                      LEFT JOIN Armors a ON ca.armor_id = a.armor_id
                       WHERE ca.character_id = :character_id");
 $stmt->bindParam(':character_id', $post['character_id']);
 $stmt->execute();
@@ -67,8 +67,8 @@ function getUsername($user_id)
         <?php include('nav.php'); ?>
 
         <div class="post-details">
-            <?php if ($post['image_path']) : ?>
-                <img src="<?php echo $post['image_path']; ?>" alt="Character Image" width="200">
+            <?php if ($post['image_path']) :  ?>
+                <img src="<?php echo $post['image_path'] ; ?>" alt="Character Image" width="200">
             <?php else : ?>
                 <img src="images/unavailable.png" alt="Character Image" width="100">
             <?php endif; ?>
@@ -78,15 +78,15 @@ function getUsername($user_id)
                 <table>
                     <tr>
                         <td>Character Name:</td>
-                        <td><?php echo $post['character_name']; ?></td>
+                        <td><?php echo $post['character_name'] ?? 'None'; ?></td>
                     </tr>
                     <tr>
                         <td>Level:</td>
-                        <td><?php echo $post['level']; ?></td>
+                        <td><?php echo $post['level'] ?? 'None'; ?></td>
                     </tr>
                     <tr>
                         <td>Class:</td>
-                        <td><?php echo $post['class_name']; ?></td>
+                        <td><?php echo $post['class_name'] ?? 'None'; ?></td>
                     </tr>
                     <tr>
                         <td>Weapon:</td>
@@ -94,7 +94,7 @@ function getUsername($user_id)
                     </tr>
                     <tr>
                         <td>Element:</td>
-                        <td><?php echo $post['element_name']; ?></td>
+                        <td><?php echo $post['element_name'] ?? 'None'; ?></td>
                     </tr>
                 </table>
                 <h3>Equipped Armors</h3>

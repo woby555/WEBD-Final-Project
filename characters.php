@@ -19,11 +19,11 @@ $stmt = $db->query("SELECT
                         Posts p ON c.character_id = p.character_id
                     JOIN
                         Users u ON c.user_id = u.user_id
-                    JOIN
+                    LEFT JOIN
                         Classes cls ON c.class_id = cls.class_id
                     LEFT JOIN
                         Weapons w ON c.weapon_id = w.weapon_id
-                    JOIN
+                    LEFT JOIN
                         Elements e ON c.element_id = e.element_id;");
 $characters = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -87,9 +87,9 @@ $characters = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <?php endif; ?>
                     </td>
                     <td><?php echo $character['level']; ?></td>
-                    <td><?php echo $character['class_name']; ?></td>
-                    <td><?php echo $character['weapon_name'] ?? 'None'; ?></td>
-                    <td><?php echo $character['element_name']; ?></td>
+                    <td><?php echo $character['class_name'] !== null ? $character['class_name'] : ''; ?></td>
+                    <td><?php echo $character['weapon_name'] !== null ? $character['weapon_name'] : ''; ?></td>
+                    <td><?php echo $character['element_name'] !== null ? $character['element_name'] : ''; ?></td>
                     <td><?php echo $character['username']; ?></td>
                 </tr>
             <?php endforeach; ?>
