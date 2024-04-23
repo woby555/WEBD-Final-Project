@@ -7,12 +7,11 @@ if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'Administrator') {
     exit();
 }
 
-// Include database connection
 require_once 'connect.php';
 
 // Check if user_id is provided in the URL
 if (!isset($_GET['id'])) {
-    header("Location: admin_dashboard.php"); // Redirect if user_id is not provided
+    header("Location: admin_dashboard.php");
     exit();
 }
 

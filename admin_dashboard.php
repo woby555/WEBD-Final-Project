@@ -1,22 +1,20 @@
 <?php
 session_start();
 
-// Check if user is logged in and is an administrator
+// Administrator Check
 if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'Administrator') {
     header("Location: index.php"); // Redirect to login page if not logged in as an administrator
     exit();
 }
 
-// Include database connection
 require_once 'connect.php';
 
 // Fetch all users from the database
 $stmt = $db->query("SELECT * FROM Users");
 $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-// Check if form is submitted
+// Add User Form Submission
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Retrieve form data
     $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -24,7 +22,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Hash and salt the password
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-    // Prepare and execute the SQL statement to insert user into database
     $stmt = $db->prepare("INSERT INTO Users (username, email, hashed_password, role) VALUES (:username, :email, :password, :role)");
     $stmt->bindParam(':username', $username);
     $stmt->bindParam(':email', $email);

@@ -1,6 +1,5 @@
 <?php
 
-// Include database connection
 require_once 'connect.php';
 
 // Fetch post details and character information
@@ -41,8 +40,6 @@ function getUsername($user_id)
     return $result ? $result['username'] : 'Unknown';
 }
 
-//////////////////// CAPTCHA TEST
-// Generate a random CAPTCHA code
 ?>
 
 <!DOCTYPE html>
@@ -125,10 +122,9 @@ function getUsername($user_id)
                             <p>Posted by: <?php echo getUsername($comment['user_id']); ?></p>
                             <p>Date Posted: <?php echo $comment['date_posted']; ?></p>
                             <?php if (isset($_SESSION['role']) && ($_SESSION['role'] === 'Administrator' || $_SESSION['user_id'] === $comment['user_id'])) : ?>
-                                <!-- Display delete button for administrators or comment authors -->
                                 <form action="delete_comment.php" method="post">
                                     <input type="hidden" name="comment_id" value="<?php echo $comment['comment_id']; ?>">
-                                    <input type="hidden" name="post_id" value="<?php echo $post_id; ?>"> <!-- Add this line -->
+                                    <input type="hidden" name="post_id" value="<?php echo $post_id; ?>"> 
                                     <button type="submit">Delete</button>
                                 </form>
                             <?php endif; ?>

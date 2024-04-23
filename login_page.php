@@ -36,7 +36,7 @@
                 <button type="submit">Login</button>
             </form>
             <div class="additional-options">
-                <a href="forgot_password.php">Forgot Password?</a>
+                <!--<a href="forgot_password.php">Forgot Password?</a>-->
                 <span> | </span>
                 <a href="register.php">Register</a>
             </div>

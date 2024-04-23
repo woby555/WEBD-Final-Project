@@ -104,13 +104,11 @@ $characters = $stmt->fetchAll(PDO::FETCH_ASSOC);
             echo '<h2>Administrator Actions</h2>';
             echo '<a href="create_char.php">Add New Character</a><br>';
             echo '<a href="delete_char.php">Delete Character</a>';
-            // Additional CRUD operations such as update and delete can be added here
         }
         if (isset($_SESSION['role']) && $_SESSION['role'] === 'User') {
             // Display CRUD operations for administrators
             echo '<h2>User Actions</h2>';
             echo '<a href="create_char.php">Create a character!</a>';
-            // Additional CRUD operations such as update and delete can be added here
         }
         ?>
         <?php include('footer.php'); ?>

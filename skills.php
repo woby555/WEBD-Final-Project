@@ -24,7 +24,6 @@
         <button onclick="clearSort()">CLEAR SORTING</button>
         <button onclick="sortTable(1)">Sort by Class</button>
 
-        <!-- Additional buttons to sort by respective classes -->
         <?php
         // Fetch distinct class names from the database
         require_once 'connect.php';
@@ -76,7 +75,6 @@
             echo '<h2>Administrator Actions</h2>';
             echo '<a href="add_skill.php">Add New Skill</a><br>';
             echo '<a href="delete_skill.php"> Delete Skill</a>';
-            // Additional CRUD operations such as update and delete can be added here
         }
         ?>
     </div>

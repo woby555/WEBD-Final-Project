@@ -48,7 +48,6 @@ $weapons = $stmt->fetchAll(PDO::FETCH_ASSOC);
             echo '<h2>Administrator Actions</h2>';
             echo '<a href="add_weapon.php">Add New Weapon</a><br>';
             echo '<a href="delete_weapon.php">Delete Weapon</a>';
-            // Additional CRUD operations such as update and delete can be added here
         }
         ?>
     </div>

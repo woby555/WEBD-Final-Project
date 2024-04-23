@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-// Include database connection
 require_once 'connect.php';
 
 // Check if the user is logged in
@@ -37,7 +36,6 @@ $post_id = filter_input(INPUT_POST, 'post_id', FILTER_VALIDATE_INT);
 if ($post_id) {
     header("Location: show.php?post_id=" . $post_id);
 } else {
-    // Redirect to a default page if post_id is not provided or invalid
     header("Location: index.php");
 }
 exit();

@@ -7,7 +7,6 @@ if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'Administrator') {
     exit();
 }
 
-// Include database connection
 require_once 'connect.php';
 
 // Check if user_id is provided in the URL
@@ -25,16 +24,15 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
 // Check if form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Retrieve form data
+
     $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-    $role = $_POST['role']; // No need to sanitize as it's a predefined value
+    $role = $_POST['role']; 
 
     // Hash and salt the password
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-    // Prepare and execute the SQL statement to update user in the database
     $stmt = $db->prepare("UPDATE Users SET username = :username, email = :email, hashed_password = :password, role = :role WHERE user_id = :user_id");
     $stmt->bindParam(':username', $username);
     $stmt->bindParam(':email', $email);
@@ -50,8 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         $_SESSION['update_error'] = "An error occurred while updating user details. Please try again later.";
         // Debugging: Print error info
-        echo "Error: " . $stmt->errorInfo()[2]; // This will print the detailed error message
-        // header("Location: admin_dashboard.php");
+        echo "Error: " . $stmt->errorInfo()[2];
         exit();
     }
 }

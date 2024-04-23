@@ -7,7 +7,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'Administrator') {
     exit();
 }
 
-require('connect.php');; // Include database connection
+require('connect.php');;
 
 // Function to delete an image file from the server
 function deleteImage($imagePath)

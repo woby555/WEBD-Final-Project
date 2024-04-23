@@ -1,13 +1,15 @@
 <?php
 session_start();
 
+// Administrator Check
 if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'Administrator') {
-    header("Location: index.php"); // Redirect to login page if not logged in as an administrator
+    header("Location: index.php");
     exit();
 }
 
 require('connect.php');
 
+// Form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['weapon_name'])) {
     $weapon_name = filter_input(INPUT_POST, 'weapon_name', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 

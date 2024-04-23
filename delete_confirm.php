@@ -1,4 +1,6 @@
 <?php
+/* Delete for USERS */
+
 session_start();
 require_once 'connect.php';
 

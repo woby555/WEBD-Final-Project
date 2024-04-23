@@ -1,5 +1,5 @@
 <?php
-require_once 'connect.php'; // Include the database connection file
+require_once 'connect.php';
 
 session_start();
 
@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['role'] = $user['role']; // Set user role in session
 
         if ($user['role'] == 'Administrator') {
-            require_once 'authenticate.php'; // Include the additional authentication script
+            require_once 'authenticate.php'; // Additional authenticate.php for enhanced verification
         }
         
         // Redirect to home page or do other login success logic

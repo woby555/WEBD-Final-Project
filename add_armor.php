@@ -1,20 +1,20 @@
 <?php
 session_start();
 
-// Check if user is logged in and is an administrator
+// Administrator Check
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'Administrator') {
     header('Location: login.php'); // Redirect unauthorized users
     exit();
 }
 
-require_once 'connect.php'; // Include database connection
+require_once 'connect.php';
 
-// Fetch all armor types from the database
+// Armor Fetch
 $query = "SELECT * FROM ArmorTypes";
 $statement = $db->query($query);
 $armor_types = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-// Check if form is submitted
+// Form Submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_armor'])) {
     // Validate input
     $armor_type_id = $_POST['armor_type_id'];

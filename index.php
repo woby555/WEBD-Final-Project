@@ -1,3 +1,8 @@
+<!-- 
+    Jake Licmo
+    Web Development 2 Project
+-->
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,7 +17,7 @@
 <body>
     <header class="header">
         <div class="text-center">
-            <img class="logo" src="images/logos.png">
+            <img class="logo" src="images/logos.png" alt="logo">
         </div>
     </header>
 
@@ -29,7 +34,7 @@
         <h2>Forge Your Legend</h2>
         <p>Craft your own character from the ground up, shaping every aspect of their identity. Choose from a diverse array of classes, each with unique abilities and playstyles. Harness the elemental forces of Wind, Fire, Ice, and more to tailor your character's power to your liking. Arm yourself with a vast selection of weapons and armor, customizing your loadout for every encounter.</p>
 
-        <h2>Share and Connect</h3>
+        <h2>Share and Connect</h2>
         <p>Join a thriving community of Blue Protocol enthusiasts eager to share their creations and insights. Showcase your characters, movesets, and layouts with ease, inspiring and collaborating with fellow members. Engage in lively discussions on strategy, theorycrafting the ultimate builds, and unraveling the game's deepest mysteries.</p>
         <br>
         <p>Ready to take the next step in your Blue Protocol adventure? Sign up now and become part of our vibrant community. The future of Blue Protocol awaits, and it's yours to shape.</p>

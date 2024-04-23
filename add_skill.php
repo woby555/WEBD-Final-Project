@@ -1,20 +1,20 @@
 <?php
 session_start();
 
-// Check if user is logged in and is an administrator
+// Administrator Check
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'Administrator') {
     header('Location: login.php'); // Redirect unauthorized users
     exit();
 }
 
-require_once 'connect.php'; // Include database connection
+require_once 'connect.php';
 
-// Fetch all classes from the database
+// Classes Fetch
 $query = "SELECT class_id, class_name FROM Classes";
 $statement = $db->query($query);
 $classes = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-// Check if form is submitted
+// Form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_skill'])) {
     // Validate input
     $skill_name = filter_input(INPUT_POST, 'skill_name', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_skill'])) {
     $statementInsertSkill->bindValue(':class_id', $class_id);
 
     if ($statementInsertSkill->execute()) {
-        header('Location: skills.php'); // Redirect after successful insertion
+        header('Location: skills.php'); 
         exit();
     } else {
         $error_message = "Failed to add skill. Please try again.";

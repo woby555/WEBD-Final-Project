@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+// Administrator Check 
 if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'Administrator') {
     header("Location: index.php"); // Redirect to login page if not logged in as an administrator
     exit();
@@ -8,11 +9,12 @@ if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'Administrator') {
 
 require('connect.php');
 
+// Form post
 if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['class_name']) && !empty($_POST['description'])) {
     $class_name = filter_input(INPUT_POST, 'class_name', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $description = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-    // Insert the element into the Elements table
+    // Insert the element into the Class table
     $query = "INSERT INTO CLASSES (class_name, description) VALUES (:class_name, :description)";
     $statement = $db->prepare($query);
     $statement->bindValue(':class_name', $class_name);

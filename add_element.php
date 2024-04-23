@@ -1,8 +1,9 @@
 <?php
 session_start();
 
+// Administrator Check
 if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'Administrator') {
-    header("Location: index.php"); // Redirect to login page if not logged in as an administrator
+    header("Location: index.php"); 
     exit();
 }
 
