@@ -1,5 +1,8 @@
 <?php
-
+/*
+    Jake Licmo
+    show.php - Shows the respective character's post and comments.
+*/
 require_once 'connect.php';
 
 // Fetch post details and character information

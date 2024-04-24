@@ -1,4 +1,8 @@
 <?php
+/*
+    Jake Licmo
+    delete_user.php - Shown when choosing to delete a selected user from admin_dashboard.php(Administrator access.).
+*/
 session_start();
 
 // Check if user is logged in and is an administrator

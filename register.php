@@ -1,5 +1,9 @@
 <?php
-require_once 'connect.php'; // Include the database connection file
+/*
+    Jake Licmo
+    register.php - Registration for new users.
+*/
+require_once 'connect.php';
 
 
 // Check if form is submitted

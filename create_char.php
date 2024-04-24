@@ -1,6 +1,15 @@
 <?php
+/*
+    Jake Licmo
+    create_char.php - Creates a character for both users and administrators.
+*/
 session_start();
 require('connect.php');
+
+if (!isset($_SESSION['user_id'])) {
+    header('Location: login.php'); // Redirect unauthorized users
+    exit();
+}
 
 // Function to safely build a path string for uploading files
 function file_upload_path($original_filename, $upload_subfolder_name = 'uploads')

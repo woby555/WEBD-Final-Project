@@ -1,4 +1,8 @@
 <?php
+/*
+    Jake Licmo
+    login.php - Login for users.
+*/
 require_once 'connect.php';
 
 session_start();

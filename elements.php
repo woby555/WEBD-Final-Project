@@ -1,4 +1,8 @@
 <?php
+/*
+    Jake Licmo
+    elements.php - View characters table.
+*/
 require_once 'connect.php';
 
 $stmt = $db->query("SELECT * FROM Elements");

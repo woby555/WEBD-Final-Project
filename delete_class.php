@@ -1,4 +1,8 @@
 <?php
+/*
+    Jake Licmo
+    delete_class.php - Shows a table of classes to select and delete from (Administrator access.).
+*/
 session_start();
 
 // Check if user is logged in and is an administrator

@@ -1,4 +1,8 @@
 <?php
+/*
+    Jake Licmo
+    delete_char.php - Shows a table of armors to select and delete from (Administrator Access).
+*/
 session_start();
 
 // Check if user is logged in and is an administrator

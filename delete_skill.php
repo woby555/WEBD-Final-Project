@@ -1,4 +1,8 @@
 <?php
+/*
+    Jake Licmo
+    delete_skill.php - Shows a table of skills to select and delete from (Administrator access.).
+*/
 session_start();
 
 // Check if user is logged in and is an administrator

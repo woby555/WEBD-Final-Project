@@ -1,4 +1,9 @@
 <?php
+/*
+    Jake Licmo
+    add_armor.php - Create controls for Administrator to add Armor.
+*/
+
 session_start();
 
 // Administrator Check

@@ -1,4 +1,9 @@
 <?php
+/*
+    Jake Licmo
+    add_class.php - Create controls for Administrator to add class.
+*/
+
 session_start();
 
 // Administrator Check 

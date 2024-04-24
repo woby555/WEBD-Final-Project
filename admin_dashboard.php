@@ -1,4 +1,8 @@
 <?php
+/*
+    Jake Licmo
+    admin_dashboard.php - CRUD controls to create, update, delete users, and quick access to other CRUD controls.
+*/
 session_start();
 
 // Administrator Check

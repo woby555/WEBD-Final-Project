@@ -1,5 +1,8 @@
 <?php
-
+/*
+    Jake Licmo
+    authenticate.php - Authentication from Blog assignment.
+*/
 
 define('ADMIN_LOGIN', 'wally');
 define('ADMIN_PASSWORD', 'mypass');

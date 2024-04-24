@@ -1,4 +1,8 @@
 <?php
+/*
+    Jake Licmo
+    update_user.php - Updates user information (Administrator Access).
+*/
 session_start();
 
 // Check if user is logged in and is an administrator

@@ -1,4 +1,8 @@
 <?php
+/*
+    Jake Licmo
+    delete_comment.php - Deletes a commment on a respective post (User and Administrator access).
+*/
 session_start();
 
 require_once 'connect.php';

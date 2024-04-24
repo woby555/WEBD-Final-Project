@@ -1,4 +1,9 @@
 <?php
+/*
+    Jake Licmo
+    add_weapon.php - Create controls for Administrator to add Weapons.
+*/
+
 session_start();
 
 // Administrator Check

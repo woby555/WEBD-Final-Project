@@ -1,5 +1,14 @@
 <?php session_start();
+/*
+    Jake Licmo
+    edit_char.php - Update controls for characters (User and Administrator Access).
+*/
 require('connect.php');
+
+if (!isset($_SESSION['user_id'])) {
+    header('Location: login.php'); // Redirect unauthorized users
+    exit();
+}
 
 // Check if character ID is provided
 if (!isset($_GET['id'])) {

@@ -1,6 +1,8 @@
 <?php
-/* Delete for USERS */
-
+/*
+    Jake Licmo
+    delete_confirm.php - Deletes a character after confirmation passed from delete.php. Intended for USERS.
+*/
 session_start();
 require_once 'connect.php';
 

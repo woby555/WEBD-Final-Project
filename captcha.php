@@ -1,4 +1,9 @@
 <?php
+/*
+    Jake Licmo
+    captcha.php - CAPTCHA script to display on comments page.
+*/
+
 session_start();
 
 // Generate a random string for CAPTCHA

@@ -1,4 +1,8 @@
 <?php
+/*
+    Jake Licmo
+    weapons.php - Views the weapons table.
+*/
 require_once 'connect.php';
 
 $stmt = $db->query("SELECT * FROM Weapons");

@@ -1,3 +1,9 @@
+<!--
+    /*
+    Jake Licmo
+    skills.php - Shows the skills table with sorting buttons.
+    */
+-->
 <!DOCTYPE html>
 <html lang="en">
 

@@ -1,5 +1,8 @@
 <?php
-/* This is just a confirm delete script pop-up that redirects to delete_confirm. */
+/*
+    Jake Licmo
+    delete.php - This is just a confirm delete script pop-up that redirects to delete_confirm.
+*/
 // Check if character ID is provided
 if (isset($_GET['id'])) {
     $character_id = $_GET['id'];

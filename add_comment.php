@@ -1,4 +1,9 @@
 <?php
+/*
+    Jake Licmo
+    add_comment.php - Create controls for comments.
+*/
+
 session_start();
 
 require_once 'connect.php';
@@ -8,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve form data
     $post_id = filter_input(INPUT_POST, 'post_id', FILTER_SANITIZE_NUMBER_INT); // Sanitize as number
     $comment_content = filter_input(INPUT_POST, 'comment', FILTER_SANITIZE_FULL_SPECIAL_CHARS); // Sanitize as full special chars
-    $captcha_input = filter_input(INPUT_POST, 'captcha', FILTER_SANITIZE_STRING); // Sanitize CAPTCHA input
+    $captcha_input = filter_input(INPUT_POST, 'captcha', FILTER_SANITIZE_STRING);
 
     // Validate CAPTCHA
     if (isset($_SESSION['captcha']) && $_SESSION['captcha'] === $captcha_input) {

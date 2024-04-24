@@ -1,4 +1,8 @@
 <?php
+/*
+    Jake Licmo
+    add_skill.php - Create controls for Administrator to add skills.
+*/
 session_start();
 
 // Administrator Check

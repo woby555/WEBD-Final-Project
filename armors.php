@@ -1,4 +1,9 @@
 <?php
+/*
+    Jake Licmo
+    armors.php - View armor page.
+*/
+
 require_once 'connect.php';
 
 $stmt = $db->query("SELECT Armors.armor_name, ArmorTypes.armor_type_name

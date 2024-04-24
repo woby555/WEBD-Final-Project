@@ -1,4 +1,9 @@
 <?php
+/*
+    Jake Licmo
+    add_element.php - Create controls for Administrator to add Elements.
+*/
+
 session_start();
 
 // Administrator Check

@@ -1,4 +1,8 @@
 <?php
+/*
+    Jake Licmo
+    classes.php - View characters page.
+*/
 require_once 'connect.php';
 
 $stmt = $db->query("SELECT c.class_name, c.description FROM Classes c");

@@ -1,4 +1,9 @@
 <?php
+/*
+    Jake Licmo
+    characters.php - View character page.
+*/
+
 require_once 'connect.php';
 
 $stmt = $db->query("SELECT
